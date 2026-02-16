@@ -1,0 +1,7 @@
+{
+  "name": "fileSaveApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
