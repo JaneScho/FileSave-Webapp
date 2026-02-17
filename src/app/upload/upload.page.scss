@@ -1,0 +1,44 @@
+
+.file-input{
+    width: 200px;
+            height: 200px;
+            margin: auto;
+            border-radius: 10px;
+            border: 4px solid #F2E96D;
+            background: #566873;
+}
+
+.tag-display{
+    margin: 2%;
+    background: #feffff;
+    border-radius: 10px;
+}
+
+.tag-display ion-col{
+    background-color: #F2E96D;
+    border-radius: 20px;
+    margin: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.secondary-content{
+    margin-top: 4%;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+.secondary-content > div{
+    background-color: aquamarine;
+    border-radius: 15px;
+    padding: 2%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2%;
+}
+
+.custom-center-button {
+    margin-bottom: 20px;
+    
+}

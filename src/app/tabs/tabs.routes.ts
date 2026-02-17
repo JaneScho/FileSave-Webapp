@@ -7,30 +7,45 @@ export const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'gallery',
         loadComponent: () =>
-          import('../tab1/tab1.page').then((m) => m.Tab1Page),
+          import('../gallery/gallery.page').then((m) => m.GalleryPage),
       },
       {
-        path: 'tab2',
+        path: 'private',
         loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+          import('../private/private.page').then((m) => m.PrivatePage),
       },
       {
-        path: 'tab3',
+        path: 'shared',
         loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+          import('../shared/shared.page').then((m) => m.SharedPage),
+      },
+      {
+        path: 'search',
+        loadComponent: () =>
+          import('../search/search.page').then((m) => m.SearchPage),
+      },
+      {
+        path: 'upload',
+        loadComponent: () =>
+          import('../upload/upload.page').then((m) => m.UploadPage),
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('../settings/settings.page').then((m) => m.SettingsPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/gallery',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/gallery',
     pathMatch: 'full',
   },
 ];

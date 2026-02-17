@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Datei hochladen
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Datei hochladen</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="secondary-content">
+    <div>
+      <div class="file-input">
+
+      </div>
+      <input type="file">
+    </div>
+    <div>
+      <ion-label>Name:</ion-label> test.jpg
+    </div>
+
+    <div>
+      <ion-label>Speicherort: </ion-label>
+      <select name="uploadType" id="uploadType">
+        <option value="gallery">Gallery</option>
+        <option value="shared">Geteilte</option>
+        <option value="private">Private</option>
+      </select>
+      <!--Speicherorte-->
+      <ion-input label="Pfad: "></ion-input>
+    </div>
+    <div>
+      <ion-label>Tags:</ion-label>
+      <div class="tag-display">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+            <ion-col size="auto">Hund
+              <ion-icon name="close-sharp"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <ion-input label="Tag finden: "></ion-input>
+      <!--set debound-->
+      <!--Tags-->
+    </div>
+  </div>
+  
+  
+  <div class="secondary-content">
+    
+  </div>
+</ion-content>
