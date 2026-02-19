@@ -7,6 +7,8 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class CameraService {
 
   public async takeNewPicture(){
+    await window.customElements.whenDefined('pwa-camera-modal');
+    
     const image = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       quality: 90,
