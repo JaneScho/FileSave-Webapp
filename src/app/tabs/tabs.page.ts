@@ -27,10 +27,11 @@ export class TabsPage {
   }
 
   async takeNewPhoto(){
+    /*
     this.http.get<any>('http://indigo-bat-40212.zap.cloud:4582/api/auth/whoami')
       .subscribe({
         next: (data) => {
-          this.userName = data.username; // Should be "Chantal"
+          this.userName = data.username;
           console.log('Current location: ', this.userName )
         },
         error: (err) => {
@@ -38,14 +39,18 @@ export class TabsPage {
           this.userName = 'Unknown User';
         }
       });
-    /*
+    */
+
+
+    //eigentlicher code
     const location = await this.locationService.getLocationName();
 
     console.log('Current location: ', location )
     
     //cameraService ist noch nicht fertig -> sollte formData zurueckgeben
     //der Tag wird dann noch mit 'location' hinzugefuegt
-    this.cameraService.takeNewPicture();
-    */
+    const formData = await this.cameraService.takeNewPicture();
+
+    //Tag hinzufuegen
   }
 }

@@ -13,7 +13,7 @@ export class Tags {
   constructor(private http: HttpClient){}
 
   searchTags(search: string){
-    const url = `${api.path}/search`;
+    const url = `${api.path}/tags/search`;
 
     let params = new HttpParams();
     if(search){
@@ -21,8 +21,6 @@ export class Tags {
     }
     params = params.set('limit', this.LIMIT);
 
-
-    //TODO: ...
-    //return this.http.get<TagCollectionDTO>(url,params);
+    return this.http.get<TagCollectionDTO>(url,params);
   }
 }

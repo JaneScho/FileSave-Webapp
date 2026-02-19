@@ -32,7 +32,7 @@ export class Bearbeiten {
     }
 
 
-    return this.http.delete(url,);
+    return this.http.delete(url,{params});
   }
   
 }
