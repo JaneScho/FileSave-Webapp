@@ -2,6 +2,8 @@ import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonFabList, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline } from 'ionicons/icons';
+import { CameraService } from '../services/camera.service';
+import { LocationService } from '../services/location.service';
 
 @Component({
   selector: 'app-tabs',
@@ -12,7 +14,17 @@ import { closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, ima
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
 
-  constructor() {
+  constructor(public cameraService : CameraService, public locationService : LocationService) {
     addIcons({ closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline });
+  }
+
+  async takeNewPhoto(){
+    const location = await this.locationService.getLocationName();
+
+    console.log('Current location: ', location )
+    
+    //cameraService ist noch nicht fertig -> sollte formData zurueckgeben
+    //der Tag wird dann noch mit 'location' hinzugefuegt
+    this.cameraService.takeNewPicture();
   }
 }
