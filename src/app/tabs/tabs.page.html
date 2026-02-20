@@ -1,42 +1,160 @@
-<ion-tabs>
-  <ion-fab slot="fixed" vertical="bottom" horizontal="center" class="custom-center-button">
-    <ion-fab-button>
-      <ion-icon name="cloud-upload-outline"></ion-icon>
-    </ion-fab-button>
+<div class="ion-page">
+  <ion-tabs>
+    <div class="ion-hide-sm-up">
+      <ion-fab slot="fixed" vertical="bottom" horizontal="center" class="custom-center-button">
+        <ion-fab-button>
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+        </ion-fab-button>
 
-    <ion-fab-list side="end">
-      <ion-fab-button (click)="takeNewPhoto()">
-        <ion-icon name="camera-outline" size="large"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button href="/tabs/upload">
-        <ion-icon name="push-outline" size="large"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+        <ion-fab-list side="top">
+          <ion-fab-button (click)="takeNewPhoto()">
+            <ion-icon name="camera-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button href="/tabs/upload">
+            <ion-icon name="push-outline" size="large"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
 
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button class="nav-item nav-item-sm" tab="gallery" [routerLinkActive]="'active'" [routerLink]="['/tabs/gallery']">
+          <ion-icon aria-hidden="true" name="image"></ion-icon>
+          <ion-label>Gallery</ion-label>
+        </ion-tab-button>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="gallery" href="/tabs/gallery">
-      <ion-icon aria-hidden="true" name="image"></ion-icon>
-      <ion-label>Gallery</ion-label>
-    </ion-tab-button>
+        <ion-tab-button class="nav-item nav-item-sm" tab="private" [routerLinkActive]="'active'" [routerLink]="['/tabs/private']">
+          <ion-icon aria-hidden="true" name="folder"></ion-icon>
+          <ion-label>Privat</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button tab="private" href="/tabs/private">
-      <ion-icon aria-hidden="true" name="folder"></ion-icon>
-      <ion-label>Privat</ion-label>
-    </ion-tab-button>
+        <ion-tab-button class="transparent"></ion-tab-button>
+        <!--empty button zur Anpassung des Layouts-->
 
+        <ion-tab-button class="nav-item nav-item-sm" tab="shared" [routerLinkActive]="'active'" [routerLink]="['/tabs/shared']">
+          <ion-icon aria-hidden="true" name="share-social"></ion-icon>
+          <ion-label>Geteilt</ion-label>
+        </ion-tab-button>
 
-    <ion-tab-button></ion-tab-button> <!--empty button zur Anpassung des Layouts-->
+        <ion-tab-button class="nav-item nav-item-sm" tab="search" [routerLinkActive]="'active'" [routerLink]="['/tabs/search']">
+          <ion-icon aria-hidden="true" name="search"></ion-icon>
+          <ion-label>Suche</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </div>
+    <!--Medium-->
+    <div class="align-center-top ion-hide-sm-down ion-hide-lg-up">
+      <div class="nav-container">
+        <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/gallery']"
+      >
+        <ion-icon name="images-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/private']"
+      >
+        <ion-icon name="folder-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/shared']"
+      >
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/search']"
+      >
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+      </div>
+    </div>
 
-    <ion-tab-button tab="shared" href="/tabs/shared">
-      <ion-icon aria-hidden="true" name="share-social"></ion-icon>
-      <ion-label>Geteilt</ion-label>
-    </ion-tab-button>
+    <!--Large-->
+    <div class="align-center-top  ion-hide-lg-down">
+      <div class="nav-container">
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/gallery']">
+        <ion-icon name="images-outline"></ion-icon>
+        <ion-label>Gallerie</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/private']">
+        <ion-icon name="folder-outline"></ion-icon>
+        <ion-label>Dateien</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/shared']">
+        <ion-icon name="share-social-outline"></ion-icon>
+        <ion-label>Geteilt</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/search']">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Suche</ion-label>
+      </ion-button>
+    </div>
+    </div>
+  </ion-tabs>
+</div>
 
-    <ion-tab-button tab="search" href="/tabs/search">
-      <ion-icon aria-hidden="true" name="search"></ion-icon>
-      <ion-label>Suche</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-</ion-tabs>
+<!--div class="nav-container ion-page ion-hide-lg-down">
+  <!-Show on lg and up->
+  <ion-tabs>
+    <div class="nav-container">
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/gallery']">
+        <ion-icon name="images-outline"></ion-icon>
+        <ion-label>Gallerie</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/private']">
+        <ion-icon name="folder-outline"></ion-icon>
+        <ion-label>Dateien</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/shared']">
+        <ion-icon name="share-social-outline"></ion-icon>
+        <ion-label>Geteilt</ion-label>
+      </ion-button>
+      <ion-button class="nav-item" [routerLinkActive]="'active'" [routerLink]="['/tabs/search']">
+        <ion-icon name="search-outline"></ion-icon>
+        <ion-label>Suche</ion-label>
+      </ion-button>
+    </div>
+  </ion-tabs>
+</!--div>
+
+<div class="ion-page ion-hide-sm-down ion-hide-lg-up">
+  <!-Show on sm and md->
+  <ion-tabs>
+    <div class="nav-container">
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/gallery']"
+      >
+        <ion-icon name="images-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/private']"
+      >
+        <ion-icon name="folder-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/shared']"
+      >
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+      <ion-button
+        class="nav-item"
+        [routerLinkActive]="'active'"
+        [routerLink]="['/tabs/search']"
+      >
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-tabs>
+</div-->
