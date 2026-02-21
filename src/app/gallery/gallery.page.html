@@ -24,6 +24,7 @@
     </ion-toolbar>
   </ion-header>
 
+  <!--
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -42,19 +43,57 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- bei Listenauswahl
-  <ion-list>
-    <ion-item>
-      test.jpg
-    </ion-item>
-    <ion-item>
-      test.jpg
-    </ion-item>
-    <ion-item>
-      test.jpg
-    </ion-item>
-  </ion-list>
   -->
+
+  <!-- bei Listenauswahl -->
+  <ion-list>
+  @for(file of files$ | async; track file)
+  {
+    <ion-item>
+      <ion-label>
+        <h2>{{file.filename}}</h2>
+        <div class="tags">
+          @for (tag of file.tags; track tag) {
+          <ion-chip color="primary" outline="true">
+              <ion-label>{{tag}}</ion-label>
+            </ion-chip>
+          }
+        </div>
+      </ion-label>
+
+      <ion-button id="open-modal" slot="end" fill="clear" color="medium">
+        mehr
+      </ion-button>
+
+    </ion-item>
+  }
+</ion-list>
+
+<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Welcome</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-input
+            label="Enter your name"
+            labelPlacement="stacked"
+            type="text"
+            placeholder="Your name"
+            [(ngModel)]="name"
+          ></ion-input>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
 </ion-content>
