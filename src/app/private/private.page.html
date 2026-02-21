@@ -1,24 +1,33 @@
-<!--ion-header [translucent]="true">
+<ion-header class="ion-hide-sm-up" [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Private Dateien
-    </ion-title>
+    <ion-title> Private Dateien </ion-title>
   </ion-toolbar>
-</!--ion-header-->
+</ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--ion-header collapse="condense">
+  <ion-header collapse="condense" class="ion-hide-sm-up">
     <ion-toolbar>
       <ion-title size="large">Private Dateien</ion-title>
     </ion-toolbar>
-  </!--ion-header-->
-  <app-explore-container name="Private Dateien"> </app-explore-container>
+  </ion-header>
 
   <div class="body">
+    <div class="ion-hide-sm-down">
+      <h2>Private Dateien</h2>
+      <sub>Pfad: </sub>
+    </div>
+    <hr />
     <div class="file-container">
       @for(file of files; track $index){
-      <cmp-file-list-item [file-data]="file" (itemClicked)="listItemSelected($event)"></cmp-file-list-item>
+      <cmp-file-list-item
+        [file-data]="file"
+        (itemClicked)="listItemSelected($event)"
+      ></cmp-file-list-item>
       }
     </div>
   </div>
+
+  @if(showPopup){
+  <page-file-popup [file-data]="selectedFile"></page-file-popup>
+  }
 </ion-content>

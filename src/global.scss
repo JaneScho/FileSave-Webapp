@@ -46,6 +46,8 @@ $light-gray: #c3c3c3;
 $primary: #ebf21b;
 $primary-dark: #F2E307;
 $secondary: #c1c1c1;
+$tinted-gray: #8FA6A6;
+$contrast: #3084F2;
 
 :root {
     --ion-color-primary: $primary;
@@ -62,7 +64,7 @@ $secondary: #c1c1c1;
     --ion-color-secondary-shade: #7f7f7f;
     --ion-color-secondary-tint: #e8e8e8;
 
-    --ion-background-color: #abc1bf;
+    --ion-background-color: radial-gradient(circle, #e6e6cf 0%, #abc1bf 94%);
     --ion-background-color-rgb: 193, 193, 193;
     --ion-background-color-contrast: #f2e307;
     --ion-background-color-contrast-rgb: 242, 227, 7;
@@ -98,9 +100,53 @@ ion-item.input{
     --background: rgba(218, 229, 231, 0.20);
 }
 
+cmp-tag-input-label{
+    display: inline-flex;
+    max-width: fit-content;
+}
+
 .row {
   display: flex;
   justify-content: start;
 }
 
+.tag-area{
+    display: grid;
+    border-radius: 8px;
+    background-color: $tinted-gray;
+}
 
+.my-3{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.mx-auto{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ms-1{
+    margin-left: 10px;
+}
+
+.fs-4{
+    font-size: 24px;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.center-vertical{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.display-block{
+    display: block;
+}
+
+.display-flex{
+    display: flex;
+}

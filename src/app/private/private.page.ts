@@ -1,20 +1,23 @@
 import { FileListDTO } from './../services/interfaces/dtos';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, ViewChild } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { FileListItemComponent } from '../components/file-list-item/file-list-item.component';
+import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 
 @Component({
   selector: 'app-private',
   templateUrl: 'private.page.html',
   styleUrls: ['private.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, FileListItemComponent]
+  imports: [IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
 })
 export class PrivatePage {
-  files: FileListDTO[] = []
+  @ViewChild('popup') popup !: FilePopupComponent;
+  showPopup: Boolean = false;
+  files: FileListDTO[] = [];
+  selectedFile !: FileListDTO; 
 
-  constructor() {
-    this.files = [{filename: 'TestFile.txt', filepath: '/', isFolder: false, tags: []} as FileListDTO, 
+  constructor(private cdr: ChangeDetectorRef) {
+    this.files = [{filename: 'TestFile.txt', filepath: '/', isFolder: false, tags: ['testTag', 'testTag2', "aawdawdaw", "bawdawda", "boadawdawdawdawd"]} as FileListDTO, 
                   {filename: 'Bob.txt', filepath: '/', isFolder: false, tags: []} as FileListDTO,
                   {filename: 'BobFolder', filepath: '/', isFolder: true, tags: []} as FileListDTO]
   }
@@ -25,6 +28,9 @@ export class PrivatePage {
     }
     else{
       //TODO show popup for file
+      this.showPopup = true;
+      this.selectedFile = fileData;
+      this.cdr.detectChanges();
     }
   }
 }

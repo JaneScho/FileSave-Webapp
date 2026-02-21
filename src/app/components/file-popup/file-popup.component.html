@@ -1,0 +1,20 @@
+<div class="popup-inner">
+  <h3>
+    Dateiname: <span>{{ fileData.filename }}</span>
+  </h3>
+  <h5>Pfad: {{ fileData.filepath }}</h5>
+  <hr />
+  <h4>Tags:</h4>
+  <div class="tag-area">
+    @for (tag of fileData.tags; track $index) {
+      <cmp-tag-input-label
+        [tag]="tag"
+        (triggerRemove)="removeTag(fileData.tags.indexOf(tag))"
+      ></cmp-tag-input-label>
+    }
+  </div>
+  <div>
+    <label></label>
+    <input type="">
+  </div>
+</div>
