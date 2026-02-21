@@ -21,6 +21,6 @@ export class Tags {
     }
     params = params.set('limit', this.LIMIT);
 
-    return this.http.get<TagCollectionDTO>(url,params);
+    return this.http.get<TagCollectionDTO>(url, {params});
   }
 }

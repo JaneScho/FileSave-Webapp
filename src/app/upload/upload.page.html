@@ -18,59 +18,68 @@
       <div class="file-input">
 
       </div>
-      <input type="file">
+      <input type="file" (change)="onFileSelected($event)">
     </div>
     <div>
-      <ion-label>Name:</ion-label> test.jpg
+      <ion-label>Name:</ion-label> {{ fileName || 'Keine Datei ausgewählt' }}
     </div>
 
     <div>
       <ion-label>Speicherort: </ion-label>
-      <select name="uploadType" id="uploadType">
+      <select [(ngModel)]="uploadType">
         <option value="gallery">Gallery</option>
         <option value="shared">Geteilte</option>
-        <option value="private">Private</option>
+        <option value="files">Private</option>
       </select>
       <!--Speicherorte-->
-      <ion-input label="Pfad: "></ion-input>
+      @if (uploadType === 'shared' || uploadType === 'files') {
+        <ion-input label="Pfad: " [(ngModel)]="path" placeholder="/my-folder/" class="animate-fade-in">
+    </ion-input>
+      }
     </div>
     <div>
       <ion-label>Tags:</ion-label>
       <div class="tag-display">
         <ion-grid>
           <ion-row>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
+            @for (tag of tags; track tag; let i = $index) {
+            <ion-col size="auto" class="tag-col">
+              <ion-chip>
+                <ion-label>{{ tag }}</ion-label>
+                <ion-icon name="close-sharp" (click)="removeTag(i)"></ion-icon>
+              </ion-chip>
             </ion-col>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
-            </ion-col>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
-            </ion-col>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
-            </ion-col>
-            <ion-col size="auto">Hund
-              <ion-icon name="close-sharp"></ion-icon>
-            </ion-col>
+          }
           </ion-row>
         </ion-grid>
       </div>
 
-      <ion-input label="Tag finden: "></ion-input>
-      <!--set debound-->
-      <!--Tags-->
+      <div class="search-container">
+        <ion-input 
+          label="Tag suchen oder erstellen: " 
+          labelPlacement="floating"
+          [(ngModel)]="newTag" 
+          (ionInput)="onSearchInput($event)"
+          (keyup.enter)="addTag()"
+          placeholder="z.B. Urlaub">
+        </ion-input>
+        @if (suggestedTags$ | async; as suggestions) {
+          @if (suggestions.length > 0) {
+            <ion-list class="floating-suggestion-list">
+              @for (s of suggestions; track s) {
+                <ion-item button (click)="selectTag(s)">
+                  <ion-label>{{ s }}</ion-label>
+                </ion-item>
+              }
+            </ion-list>
+          }
+        }
+      </div>
     </div>
-  </div>
-  
-  
-  <div class="secondary-content">
-    
+
+    <ion-button (click)="submitUpload()" 
+      [disabled]="!selectedFile">
+      Jetzt hochladen
+    </ion-button>
   </div>
 </ion-content>
