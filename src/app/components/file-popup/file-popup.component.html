@@ -17,4 +17,7 @@
     <label>Tag hinzufügen</label>
     <cmp-searching-text-input [options]="tagOptions"></cmp-searching-text-input>
   </div>
+  <ion-button (click)="downloadFile(fileData.filename, fileData.filepath)">
+    <ion-icon name="download-outline"></ion-icon>
+  </ion-button>
 </div>
