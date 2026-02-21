@@ -23,10 +23,10 @@
     <ion-label>Tag hinzufügen</ion-label>
     <cmp-searching-text-input
       [options]="tagOptions"
+      (onValueChanged)="selectedAddTag = $event"
       class="ion-display-flex ion-flex-1 ion-margin"
     ></cmp-searching-text-input>
-    <ion-button
-      ><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
+    <ion-button (click)="addTag(selectedAddTag)"><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
     ></ion-button>
   </ion-row>
 

@@ -18,7 +18,8 @@ import { addCircleOutline, addOutline, closeOutline, downloadOutline, trashOutli
 export class FilePopupComponent implements OnInit {
   @Input('file-data') fileData: FileListDTO = { filename: '', filepath: '/', isFolder: false, tags: [] }
   @Output() hidePopup = new EventEmitter();
-  tagOptions: String[] = ['Testtags', 'Muss geladen werden'];
+  tagOptions: string[] = ['Testtags', 'Muss geladen werden'];
+  selectedAddTag: string = "";
 
   constructor(private cdr: ChangeDetectorRef) {
     addIcons({ addCircleOutline, downloadOutline, trashOutline, closeOutline });
@@ -35,7 +36,16 @@ export class FilePopupComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  callHidePopup(){
+  addTag(tag: string) {
+    tag = tag.trim();
+    console.log("Adding Tag: " + tag);
+    if (tag.length > 0) {
+      this.fileData.tags.push(tag);
+      this.cdr.detectChanges();
+    }
+  }
+
+  callHidePopup() {
     this.hidePopup.emit();
   }
 }
