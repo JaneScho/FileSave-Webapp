@@ -17,6 +17,8 @@ import { addCircleOutline, addOutline, closeOutline, downloadOutline, trashOutli
 })
 export class FilePopupComponent implements OnInit {
   @Input('file-data') fileData: FileListDTO = { filename: '', filepath: '/', isFolder: false, tags: [] }
+  private oldTags: string[] = [];
+
   @Output() hidePopup = new EventEmitter();
   tagOptions: string[] = ['Testtags', 'Muss geladen werden'];
   selectedAddTag: string = "";
@@ -27,6 +29,7 @@ export class FilePopupComponent implements OnInit {
 
   ngOnInit() {
     //TODO Retrieve possible tags for tagOptions
+    this.oldTags = this.oldTags.concat(this.fileData.tags);
   }
 
   removeTag(tagIndex: number) {
@@ -46,6 +49,9 @@ export class FilePopupComponent implements OnInit {
   }
 
   callHidePopup() {
+    this.fileData.tags = this.oldTags
+    this.oldTags = [];
+    this.cdr.detectChanges()
     this.hidePopup.emit();
   }
 }

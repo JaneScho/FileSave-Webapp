@@ -6,5 +6,8 @@
     <ion-icon name="document-outline" class="fs-4 center-vertical"></ion-icon>
   }
   <span class="ms-1 fs-4">{{fileData.filename}}</span>
+  @for(tag of fileData.tags; track $index){
+    <label class="tag">{{tag}}</label>
+  }
 </ion-row>
 

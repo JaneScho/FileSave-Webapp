@@ -14,7 +14,16 @@
     align-items: baseline;
 }
 
-.list-item:hover{
+.list-item:hover {
     background: $primary-dark;
     cursor: pointer;
+}
+
+.tag {
+    display: inline-flex;
+    margin: 5px;
+    background-color: $primary;
+    border-radius: 12px;
+    padding: 4px 5px;
+    color: $dark-gray;
 }
