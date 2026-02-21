@@ -17,10 +17,34 @@
 
   <!--placeholder-->
 <ion-list>
+  @for(file of files$ | async; track file)
+  {
     <ion-item>
-      <ion-label>test.jpg</ion-label>
+      <ion-label>
+        <h2>{{file.filename}}</h2>
+        <div class="tags">
+          @for (tag of file.tags; track tag) {
+          <ion-chip color="primary" outline="true">
+              <ion-label>{{tag}}</ion-label>
+            </ion-chip>
+          }
+        </div>
+      </ion-label>
+
+      <ion-button slot="end" fill="clear" color="medium">
+        mehr
+      </ion-button>
+
     </ion-item>
+  }
 </ion-list>
+
+<!--//export interface FileListDTO{
+    filename: string,
+    filepath: string,
+    isFolder: boolean,
+    tags: string[]
+}//-->
   <!--
   <ion-list>
   @for (result of results; track result) {

@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { Geolocation } from '@capacitor/geolocation';
 
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+//import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+import { CapacitorHttp, HttpResponse } from '@capacitor/core';
 
 import { firstValueFrom } from 'rxjs';
 
@@ -11,18 +13,32 @@ import { firstValueFrom } from 'rxjs';
 })
 export class LocationService {
 
-  constructor( private http:HttpClient){}
+  //constructor( private http:HttpClient){}
 
-  public async getLocationName(){
-    const coordinates = await Geolocation.getCurrentPosition();
-    
-    const url = "https://nominatim.openstreetmap.org/reverse?format=json&lat="
-                  + coordinates.coords.latitude 
-                  + "&lon=" + coordinates.coords.longitude;
+  public async getLocationName(): Promise<string>{
 
-    const data: any = await firstValueFrom(this.http.get(url));
+    try{
+      const coordinates = await Geolocation.getCurrentPosition();
+      const options = {
+        url: 'https://nominatim.openstreetmap.org/reverse',
+        params: {
+          format: 'json',
+          lat: coordinates.coords.latitude.toString(),
+          lon: coordinates.coords.longitude.toString()
+        },
+        headers: { 
+          // Identifies your app to OSM to avoid 403/425 errors
+          'User-Agent': 'MyIonicPhotoApp/1.0 (contact: your-email@example.com)' 
+        }
+      };
 
-    return data.address.city || data.address.town || data.address.village || 'Unknown';
+      const response: HttpResponse = await CapacitorHttp.get(options);
+
+      const data = response.data;
+       return data.address.city || data.address.town || data.address.village || 'Unknown';
+    } catch (error){
+      console.error('Location error:', error);
+      return 'Location Unavailable';
+    }  
   }
-  
 }

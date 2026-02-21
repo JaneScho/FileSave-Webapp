@@ -21,6 +21,7 @@ export class CameraService {
     const fileBlob = await fileResponse.blob();
 
     const filename = `photo_${new Date().getTime()}_.${image.format}`;
+    console.log("Filename: ", filename);
     formData.append('file', fileBlob);
     formData.append('filename', filename);
     formData.append('fileType', image.format);
