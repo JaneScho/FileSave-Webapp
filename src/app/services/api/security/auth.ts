@@ -1,0 +1,37 @@
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
+import { authCodeFlowConfig } from './authConfig';
+
+@Injectable({ providedIn: 'root' })
+export class AuthService {
+  constructor(private oauthService: OAuthService, private router: Router) {
+    this.initAuth();
+  }
+
+  private initAuth() {
+  this.oauthService.configure(authCodeFlowConfig);
+  
+  // 1. Try to login
+  this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+    console.log('Discovery document loaded. Checking token...');
+
+    if (this.oauthService.hasValidAccessToken()) {
+      console.log('Token is valid! Navigating to gallery...');
+      this.router.navigate(['/tabs/gallery']);
+    } else {
+      console.log('No valid token found yet. Staying on login page.');
+    }
+  }).catch(err => {
+    console.error('Handshake failed:', err);
+  });
+}
+
+  public login() {
+    this.oauthService.initCodeFlow();
+  }
+
+  public logout() {
+    this.oauthService.logOut();
+  }
+}
