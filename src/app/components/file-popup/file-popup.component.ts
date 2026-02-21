@@ -1,44 +1,58 @@
-import { asNativeElements, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { asNativeElements, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FileListDTO } from 'src/app/services/interfaces/dtos';
 import { TagInputLabelComponent } from "../tag-input-label/tag-input-label.component";
 import { SearchingTextInputComponent } from "../searching-text-input/searching-text-input.component";
-import {IonIcon, IonButton} from '@ionic/angular/standalone';
-
-import { downloadOutline } from 'ionicons/icons';
+import { IonRow, IonLabel, IonButton, IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
-
-import { Download } from 'src/app/services/api/download';
+import { addCircleOutline, addOutline, closeOutline, downloadOutline, trashOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'page-file-popup',
   templateUrl: './file-popup.component.html',
   styleUrls: ['./file-popup.component.scss'],
-  imports: [TagInputLabelComponent, SearchingTextInputComponent,
-    IonIcon, IonButton
-  ],
-  host:{
-    class: 'w-100 popup display-flex'
+  imports: [IonIcon, IonLabel, IonRow, TagInputLabelComponent, SearchingTextInputComponent, IonButton],
+  host: {
+    class: 'popup-container ion-display-flex'
   }
 })
-export class FilePopupComponent  implements OnInit {
-  @Input('download-type') downloadType: 'shared' | 'gallery' | 'file' = 'file';
-  @Input('file-data') fileData: FileListDTO = {filename: '', filepath:'/', isFolder: false, tags:[]}
-  tagOptions: String[] = ['Testtags', 'Muss geladen werden'];
+export class FilePopupComponent implements OnInit {
+  @Input('file-data') fileData: FileListDTO = { filename: '', filepath: '/', isFolder: false, tags: [] }
+  @Output() hidePopup = new EventEmitter();
+  tagOptions: string[] = ['Testtags', 'Muss geladen werden'];
+  selectedAddTag: string = "";
 
-  constructor(private cdr: ChangeDetectorRef, private downloadService:Download) { 
-    addIcons({downloadOutline})
+  constructor(private cdr: ChangeDetectorRef) {
+    addIcons({ addCircleOutline, downloadOutline, trashOutline, closeOutline });
   }
 
   ngOnInit() {
     //TODO Retrieve possible tags for tagOptions
   }
 
-  removeTag(tagIndex: Number){
-
+  removeTag(tagIndex: number) {
+    if (tagIndex > -1) {
+      this.fileData.tags.splice(tagIndex, 1);
+    }
+    this.cdr.detectChanges();
   }
 
+  addTag(tag: string) {
+    tag = tag.trim();
+    console.log("Adding Tag: " + tag);
+    if (tag.length > 0) {
+      this.fileData.tags.push(tag);
+      this.cdr.detectChanges();
+    }
+  }
+
+  callHidePopup() {
+    this.hidePopup.emit();
+  }
+
+  /*
   downloadFile( filename: string,
                 subPath?: string){
     this.downloadService.downloadAndSaveFile(this.downloadType, filename, subPath);
   }
+    */
 }

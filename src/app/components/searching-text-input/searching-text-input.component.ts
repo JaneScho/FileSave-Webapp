@@ -1,21 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonSearchbar, IonList, IonItem } from "@ionic/angular/standalone";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IonSearchbar, IonList, IonItem, IonItemOption, IonText } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'cmp-searching-text-input',
   templateUrl: './searching-text-input.component.html',
   styleUrls: ['./searching-text-input.component.scss'],
-  imports: [IonItem, IonList, IonSearchbar, FormsModule],
+  imports: [IonText, IonItemOption, IonItem, IonList, IonSearchbar, FormsModule],
+  host:{
+    class: 'ion-display-relative'
+  }
 })
 export class SearchingTextInputComponent  implements OnInit {
-
   constructor() { }
 
   ngOnInit() {}
 
-  searchTerm: String = '';
-  @Input() options: String[] = [
+  searchTerm: string = '';
+  @Input() options: string[] = [
     'Berlin',
     'Hamburg',
     'München',
@@ -24,21 +26,28 @@ export class SearchingTextInputComponent  implements OnInit {
     'Stuttgart',
     'Düsseldorf'
   ];
-  filteredItems: String[] = [];
+  filteredItems: string[] = [];
+  @Output() onValueChanged = new EventEmitter<string>();
 
   onSearch(event: any) {
-    const val = event.target.value.toLowerCase();
-    if (val && val.trim() !== '') {
+    this.searchTerm = event.target.value;
+    this.onValueChanged.emit(this.searchTerm);
+    
+    const searchIn = this.searchTerm.toLowerCase();
+    if (searchIn && searchIn.trim() !== '') {
       this.filteredItems = this.options.filter(options =>
-        options.toLowerCase().includes(val)
+        options.toLowerCase().includes(searchIn)
       );
     } else {
       this.filteredItems = [];
     }
   }
 
-  selectItem(item: String) {
+  selectItem(item: string) {
     this.searchTerm = item;
     this.filteredItems = [];
+    this.onValueChanged.emit(this.searchTerm);
+    console.log("Emit: " + this.searchTerm);
+    
   }
 }

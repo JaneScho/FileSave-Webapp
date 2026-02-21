@@ -1,4 +1,4 @@
-<div class="row my-3 list-item" (click)="emitItemClicked()">
+<ion-row class="my-3 list-item" (click)="emitItemClicked()">
   @if(fileData.isFolder){
     <ion-icon name="folder-open-outline" class="fs-4 center-vertical"></ion-icon>
   }
@@ -6,5 +6,5 @@
     <ion-icon name="document-outline" class="fs-4 center-vertical"></ion-icon>
   }
   <span class="ms-1 fs-4">{{fileData.filename}}</span>
-</div>
+</ion-row>
 

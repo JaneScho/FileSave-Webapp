@@ -1,0 +1,47 @@
+@import 'src/global.scss';
+
+$input-color: #8fa6a6ae;
+
+ion-list{
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    max-height: 130px;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    overflow-x: auto;
+    background: $input-color;
+    border-radius: 0 8px 8px 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+ion-item-option{
+    background: transparent;
+    padding: 5px 0px;
+}
+
+ion-item-option:hover{
+    background: $primary;
+}
+
+hr{
+    background: $light-gray;
+}
+
+ion-searchbar{
+    border: 2px $primary solid;
+    --border: 2px $primary solid;
+    padding: 0;
+    --background: #8fa6a6ae;
+    border-radius: 8px;
+    --border-radius: 8px;
+    backdrop-filter: blur(10px);
+    --box-shadow: none;
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.pos-relative{
+   position: relative;
+}

@@ -51,4 +51,9 @@ export class PrivatePage implements OnInit{
       this.cdr.detectChanges();
     }
   }
+
+  hidePopup(){
+    this.showPopup = false;
+    this.cdr.detectChanges();
+  }
 }
