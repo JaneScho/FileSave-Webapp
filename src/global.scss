@@ -34,4 +34,68 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+// @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+//import Font
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+$dark-gray: #2d2d2d;
+$gray: #727272;
+$light-gray: #c3c3c3;
+$primary: #ebf21b;
+$primary-dark: #F2E307;
+$secondary: #c1c1c1;
+
+:root {
+    --ion-color-primary: $primary;
+    --ion-color-primary-rgb: 235, 242, 27;
+    --ion-color-primary-contrast: #0D0D0D;
+    --ion-color-primary-contrast-rgb: 13, 13, 13;
+    --ion-color-primary-shade: $primary-dark;
+    --ion-color-primary-tint: #eae16f;
+
+    --ion-color-secondary: $secondary;
+    --ion-color-secondary-rgb: 193, 193, 193;
+    --ion-color-secondary-contrast: #ca8b1d;
+    --ion-color-secondary-contrast-rgb: 202, 139, 29;
+    --ion-color-secondary-shade: #7f7f7f;
+    --ion-color-secondary-tint: #e8e8e8;
+
+    --ion-background-color: #abc1bf;
+    --ion-background-color-rgb: 193, 193, 193;
+    --ion-background-color-contrast: #f2e307;
+    --ion-background-color-contrast-rgb: 242, 227, 7;
+    --ion-background-color-shade: #738080;
+    --ion-background-color-tint: #abc1bf;
+    --ion-background-color-lightest: #f9ffff;
+
+    //fonts
+    --ion-default-font: 'Outfit', sans-serif;
+    --ion-font-family: 'Outfit', sans-serif;
+    --ion-dynamic-font: var(--ion-default-font);
+}
+
+
+*{
+    font-family: var(--ion-font-family) !important;
+}
+
+body, ion-app{
+    background: #E6E6CF;
+    background: radial-gradient(circle, #e6e6cf 0%, #abc1bf 94%);
+}
+
+ion-item.input{
+    padding: 2px;
+    margin: 5px 5%;
+    box-shadow: 0px 0px 7px var(--ion-background-color);
+    border-radius: 10px;
+    color: var(--ion-color-primary-contrast);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(218, 229, 231, 0.20);
+    --background: rgba(218, 229, 231, 0.20);
+}
+
+
