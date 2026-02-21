@@ -1,0 +1,10 @@
+<ion-searchbar [ngModel]="searchTerm" (ionInput)="onSearch($event)" placeholder="Suche..."></ion-searchbar>
+@if (filteredItems.length > 0) {
+  <ion-list>
+    @for (item of filteredItems;track $index) {
+      <ion-item (click)="selectItem(item)">
+        {{ item }}
+      </ion-item>
+    }
+  </ion-list>
+}
