@@ -1,0 +1,10 @@
+<div class="row" onclick="emitItemClicked()">
+  @if(fileData.isFolder){
+    <ion-icon name="folder-open-outline"></ion-icon>
+  }
+  @else{
+    <ion-icon name="document-outline"></ion-icon>
+  }
+  <span>{{fileData.filename}}</span>
+</div>
+
