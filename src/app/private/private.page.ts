@@ -11,7 +11,6 @@ import { FilePopupComponent } from "../components/file-popup/file-popup.componen
   imports: [IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
 })
 export class PrivatePage {
-  @ViewChild('popup') popup !: FilePopupComponent;
   showPopup: Boolean = false;
   files: FileListDTO[] = [];
   selectedFile !: FileListDTO; 
