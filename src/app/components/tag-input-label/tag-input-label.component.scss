@@ -3,7 +3,7 @@
 div{
     display: inline-flex;
     margin: 5px;
-    background-color: $primary-dark;
+    background-color: $primary;
     border-radius: 12px;
     padding: 4px 5px;
 }
@@ -12,6 +12,15 @@ button{
     background: none;
     border: none;
     color: $contrast;
+}
+
+ion-icon{
+    color: $contrast;
+    font-weight: bold;
+}
+
+ion-icon:hover{
+    color: $secondary;
 }
 
 span{

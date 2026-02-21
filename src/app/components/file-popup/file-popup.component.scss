@@ -1,16 +1,6 @@
 @import 'src/global.scss';
 
-.popup {
-    background: transparent;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99;
-    padding: 15px;
-}
+
 
 .popup-inner {
     /* From https://css.glass */
@@ -25,13 +15,13 @@
     min-width: 50%;
     min-height: fit-content;
     max-height: 75%;
-    padding: 15px;
-    margin-left: auto;
-    margin-right: auto;
+    overflow-y: scroll;
+    padding: 7px 15px;
+    margin: auto;
 }
 
 .tag-area{
-    display: block;
+    display: inherit;
     min-height: 50px;
     max-height: 150px;
     padding: 5px;
@@ -39,3 +29,18 @@
     background: radial-gradient(circle, #abc1bf 80%, $tinted-gray 94%);
     border: 1px solid $light-gray;
 }
+
+ion-button{
+    --border-radius: 8px;
+    --padding-top: 2px !important;
+    --padding-bottom: 2px !important;
+    --padding-end: 4px !important;
+    --padding-start: 4px !important;
+}
+
+.close-button{
+    color: $primary;
+    font-weight: bolder;
+    background: none;
+}
+

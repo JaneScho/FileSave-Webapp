@@ -1,14 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IonSearchbar, IonList, IonItem } from "@ionic/angular/standalone";
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { IonSearchbar, IonList, IonItem, IonItemOption, IonText } from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'cmp-searching-text-input',
   templateUrl: './searching-text-input.component.html',
   styleUrls: ['./searching-text-input.component.scss'],
-  imports: [IonItem, IonList, IonSearchbar, FormsModule],
+  imports: [IonText, IonItemOption, IonItem, IonList, IonSearchbar, FormsModule],
+  host:{
+    class: 'ion-display-relative'
+  }
 })
 export class SearchingTextInputComponent  implements OnInit {
+  @Output() selected !: String;
 
   constructor() { }
 

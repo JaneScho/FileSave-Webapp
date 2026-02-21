@@ -28,6 +28,6 @@
   </div>
 
   @if(showPopup){
-  <page-file-popup [file-data]="selectedFile"></page-file-popup>
+    <page-file-popup [file-data]="selectedFile" (hidePopup)="hidePopup()"></page-file-popup>
   }
 </ion-content>

@@ -1,11 +1,17 @@
 <div class="popup-inner">
-  <h3>
-    Dateiname: <span>{{ fileData.filename }}</span>
-  </h3>
+  <ion-row class="ion-justify-content-between">
+    <h3>
+      Dateiname: <span>{{ fileData.filename }}</span>
+    </h3>
+    <button (click)="callHidePopup()" class="close-button">
+      <ion-icon name="close-outline" class="fs-4"></ion-icon>
+    </button>
+  </ion-row>
+
   <h5>Pfad: {{ fileData.filepath }}</h5>
   <hr />
   <h4>Tags:</h4>
-  <div class="tag-area">
+  <div class="ion-flex-row tag-area">
     @for (tag of fileData.tags; track $index) {
       <cmp-tag-input-label
         [tag]="tag"
@@ -13,8 +19,20 @@
       ></cmp-tag-input-label>
     }
   </div>
-  <div class="my-3">
-    <label>Tag hinzufügen</label>
-    <cmp-searching-text-input [options]="tagOptions"></cmp-searching-text-input>
-  </div>
+  <ion-row class="my-3 ion-align-items-center ion-justify-content-between">
+    <ion-label>Tag hinzufügen</ion-label>
+    <cmp-searching-text-input
+      [options]="tagOptions"
+      class="ion-display-flex ion-flex-1 ion-margin"
+    ></cmp-searching-text-input>
+    <ion-button
+      ><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
+    ></ion-button>
+  </ion-row>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-button><ion-icon name="download-outline"></ion-icon></ion-button>
+    <ion-button>Speichern</ion-button>
+    <ion-button><ion-icon name="trash-outline"></ion-icon></ion-button>
+  </ion-row>
 </div>

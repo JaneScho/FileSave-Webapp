@@ -33,4 +33,9 @@ export class PrivatePage {
       this.cdr.detectChanges();
     }
   }
+
+  hidePopup(){
+    this.showPopup = false;
+    this.cdr.detectChanges();
+  }
 }
