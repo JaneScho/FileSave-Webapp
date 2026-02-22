@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonAlert, IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 
 import { Upload } from '../services/api/uploadService';
@@ -15,7 +15,7 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: 'upload.page.html',
   styleUrls: ['upload.page.scss'],
   imports: [ FormsModule, AsyncPipe,
-    IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
+    IonAlert, IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent],
 })
 export class UploadPage {
   selectedFile: File | null = null;
@@ -27,6 +27,11 @@ export class UploadPage {
 
   searchQuery$ = new Subject<string>(); //Observer und Observable -> im Text erwaehnen
  suggestedTags$: Observable<string[]>;
+
+ isFileAlertOpen = false;
+ isPathAlertOpen = false;
+
+ alertButtons = ['OK'];
 
   constructor(private uploadService: Upload, private tagService: Tags) {
     this.suggestedTags$ = this.searchQuery$.pipe(
@@ -78,10 +83,22 @@ export class UploadPage {
     this.tags.splice(index, 1);
   }
 
+ setFileAlertOpen(isOpen: boolean){
+  this.isFileAlertOpen = isOpen;
+ }
+
+ setPathAlertOpen(isOpen: boolean){
+    this.isPathAlertOpen = isOpen;
+ }
   submitUpload(){
 
     if (!this.selectedFile) {
-      console.error("No file selected!");
+      this.setFileAlertOpen(true);
+      return;
+    }
+
+    if(this.uploadType == 'shared' && !this.path){
+      this.setPathAlertOpen(true);
       return;
     }
 
@@ -98,12 +115,21 @@ export class UploadPage {
         next: (res) => {
           console.log('Upload Success:', res)
           //Toast
-          // Reset form
+          this.reset();
           },
         error: (err) => console.error('Upload Error:', err)
       });
     } catch (err) {
       console.error('Process failed:', err);
     }
+  }
+
+  reset(){
+    this.selectedFile = null;
+    this.fileName = '';
+    this.uploadType = 'gallery';
+    this.path = '';
+    this.tags = [];
+    this.newTag = '';
   }
 }

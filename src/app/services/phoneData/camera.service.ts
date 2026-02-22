@@ -20,11 +20,11 @@ export class CameraService {
     const fileResponse = await fetch(image.webPath!);
     const fileBlob = await fileResponse.blob();
 
-    const filename = `photo_${new Date().getTime()}_.${image.format}`;
+    const filename = `photo_${new Date().getTime()}`;
     console.log("Filename: ", filename);
     formData.append('file', fileBlob);
     formData.append('filename', filename);
-    formData.append('fileType', image.format);
+    formData.append('fileType', `.${image.format}`);
     //eigentlich ist duplicate hier egal
 
     return formData;

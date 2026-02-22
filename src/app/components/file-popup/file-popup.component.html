@@ -34,8 +34,16 @@
       ><ion-icon name="download-outline"></ion-icon
     ></ion-button>
     <ion-button class="action" (click)="editFile()">Speichern</ion-button>
-    <ion-button class="action" (click)="deleteFile()"
+    <ion-button class="action" id="present-delete-alert"
       ><ion-icon name="trash-outline"></ion-icon
     ></ion-button>
+    <ion-alert
+      trigger="present-delete-alert"
+      header="Wirklich löschen?"
+      subHeader="A Sub Header Is Optional"
+      message="Wenn du auf 'OK' klickst, ist die Datei unwiederuflich gelöscht."
+      [buttons]="alertButtons"
+      (didDismiss)="setResult($event)"
+    ></ion-alert>
   </ion-row>
 </div>

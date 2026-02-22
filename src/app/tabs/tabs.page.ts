@@ -2,8 +2,8 @@ import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonFabList, IonTabs, IonTabBar, IonTabButton, IonIcon, IonMenu, IonLabel, IonFab, IonFabButton, IonButton, IonMenuButton, IonButtons, IonList, IonContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { downloadOutline, closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline, barChartOutline, settingsOutline, menuOutline, folderOutline, searchOutline, shareSocialOutline, } from 'ionicons/icons';
-import { CameraService } from '../services/camera.service';
-import { LocationService } from '../services/location.service';
+import { CameraService } from '../services/phoneData/camera.service';
+import { LocationService } from '../services/phoneData/location.service';
 import { Upload } from '../services/api/uploadService';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -61,7 +61,7 @@ export class TabsPage {
       "gallery",
       formData.get('file') as Blob,
       formData.get('filename') as string,
-      formData.get('filename') as string,
+      formData.get('fileType') as string,
       'APPEND_NUMBER',
       tags
     ).subscribe({

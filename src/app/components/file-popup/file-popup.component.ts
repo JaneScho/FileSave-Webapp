@@ -2,7 +2,7 @@ import { asNativeElements, ChangeDetectorRef, Component, EventEmitter, Input, On
 import { FileListDTO, TagCollectionDTO, TagInputDTO } from 'src/app/services/interfaces/dtos';
 import { TagInputLabelComponent } from "../tag-input-label/tag-input-label.component";
 import { SearchingTextInputComponent } from "../searching-text-input/searching-text-input.component";
-import { IonRow, IonLabel, IonButton, IonIcon } from "@ionic/angular/standalone";
+import { IonAlert, IonRow, IonLabel, IonButton, IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { addCircleOutline, addOutline, closeOutline, downloadOutline, trashOutline } from 'ionicons/icons';
 import { Download } from 'src/app/services/api/download';
@@ -10,11 +10,13 @@ import { Bearbeiten } from 'src/app/services/api/bearbeiten';
 import { catchError, debounceTime, distinctUntilChanged, map, of, Subject, switchMap } from 'rxjs';
 import { Tags } from 'src/app/services/api/tags';
 
+import type { OverlayEventDetail } from '@ionic/core';
+
 @Component({
   selector: 'page-file-popup',
   templateUrl: './file-popup.component.html',
   styleUrls: ['./file-popup.component.scss'],
-  imports: [IonIcon, IonLabel, IonRow, TagInputLabelComponent, SearchingTextInputComponent, IonButton],
+  imports: [IonAlert, IonIcon, IonLabel, IonRow, TagInputLabelComponent, SearchingTextInputComponent, IonButton],
   host: {
     class: 'popup-container ion-display-flex'
   }
@@ -31,6 +33,28 @@ export class FilePopupComponent implements OnInit {
 
   searchQuery$ = new Subject<string>();
 
+  public alertButtons = [
+    {
+      text: 'Abbrechen',
+      role: 'cancel',
+      handler: () => {
+        console.log('Alert canceled');
+      },
+    },
+    {
+      text: 'Ok',
+      role: 'confirm',
+      handler: () => {
+        this.deleteFile();
+        console.log('Alert confirmed');
+      },
+    },
+  ];
+
+  setResult(event: CustomEvent<OverlayEventDetail>) {
+    console.log(`Dismissed with role: ${event.detail.role}`);
+  }
+
   constructor(private cdr: ChangeDetectorRef, 
               private downloadService:Download,
               private editService: Bearbeiten,
@@ -39,7 +63,6 @@ export class FilePopupComponent implements OnInit {
   }
 
   ngOnInit() {
-    //TODO Retrieve possible tags for tagOptions
     this.oldTags = this.oldTags.concat(this.fileData.tags);
     this.searchQuery$.pipe(
     debounceTime(300),
@@ -91,10 +114,10 @@ export class FilePopupComponent implements OnInit {
   }
 
   downloadFile(){
-                  console.log("attempting download");
+    console.log("attempting download");
     this.downloadService.downloadAndSaveFile(this.downloadType, 
-      this.fileData.filename,
-      this.fileData.filepath);
+    this.fileData.filename,
+    this.fileData.filepath);
   }
 
   editFile(){

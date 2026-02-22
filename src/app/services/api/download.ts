@@ -5,13 +5,16 @@ import { FileListDTO } from '../interfaces/dtos';
 
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Capacitor } from '@capacitor/core';
+import { PathCorService } from '../dataCorrection/path-cor-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Download {
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, 
+    private pathCorService: PathCorService
+  ){}
   
   //Listen:
   getFileList(type: 'shared' | 'gallery' | 'files',
@@ -21,7 +24,16 @@ export class Download {
 
     let params = new HttpParams();
     if(subPath){
-      params = params.set('p', subPath);
+      let cleanPath = this.pathCorService.cleanupPath(type, subPath);
+      /*
+      if(type == 'shared'){
+        console.log("Cleaning up path");
+        cleanPath = this.cleanupSharedPath(subPath);
+        console.log("Cleaned path: ", cleanPath);
+      } else {
+        cleanPath = subPath;
+      }*/
+      params = params.set('p', cleanPath);
     }
 
     return this.http.get<FileListDTO[]>(url,{params});
@@ -38,24 +50,18 @@ export class Download {
     return this.http.get<FileListDTO[]>(url,{params});
   }
 
+  
   //Dateien:
   downloadFile(type: 'shared' | 'gallery' | 'file',
               filename: string,
               subPath?: string){
-    
 
     const url = `${api.path}/download/${type}/${filename}`;
 
     
    let params = new HttpParams();
     if(subPath){
-      let cleanPath = subPath;
-
-      if (subPath.includes('/files/')) {
-        cleanPath = subPath.split('/files/')[1];
-      } else if (subPath.endsWith('/files')) {
-        cleanPath = '/';
-      }
+        let cleanPath = this.pathCorService.cleanupPath(type, subPath);
         params = params.set('p', cleanPath);
     }
 
