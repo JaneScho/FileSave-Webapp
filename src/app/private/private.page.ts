@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/api/security/auth';
 import { addIcons } from 'ionicons';
 import { logOutOutline, reloadOutline } from 'ionicons/icons';
+import { cutPath, getUpPath } from 'src/tools/tools';
 
 @Component({
   selector: 'app-private',
@@ -47,7 +48,7 @@ export class PrivatePage implements OnInit {
   listItemSelected(fileData: FileListDTO) {
     if (fileData.isFolder) {
       //TODO Navigate to new folder
-      this.currentPath = this.cutPath(fileData.filepath);
+      this.currentPath = cutPath(fileData.filepath);
       console.log(this.currentPath);
       this.loadFiles();
     }
@@ -69,18 +70,7 @@ export class PrivatePage implements OnInit {
     this.cdr.detectChanges();
   }
 
-  cutPath(fullPath: string): string {
-    const cutPattern = 'files/';
-    var cutIndex = fullPath.indexOf(cutPattern);
-    if(cutIndex < 0)
-      return fullPath;
-    return fullPath.substring(cutIndex + cutPattern.length - 1);
-  }
-
-  getUpPath(): string{
-    const cutIndex = this.currentPath.lastIndexOf('/');
-    if(cutIndex < 0)
-      return this.currentPath;
-    return this.currentPath.substring(0,cutIndex);
+  getUpPath(): string {
+    return getUpPath(this.currentPath);
   }
 }
