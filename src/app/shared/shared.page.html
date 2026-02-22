@@ -60,6 +60,7 @@
     <page-file-popup [file-data]="selectedFile" 
     [download-type]="'shared'"
     [edit-type]="'shared'"
-    (hidePopup)="hidePopup()"></page-file-popup>
+    (hidePopup)="hidePopup()"
+    (callRefresh)="loadFiles()"></page-file-popup>
   }
 </ion-content>

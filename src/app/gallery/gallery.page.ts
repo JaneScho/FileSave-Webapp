@@ -40,6 +40,8 @@ export class GalleryPage implements OnInit {
   }
 
   loadFiles() {
+    this.files = [];
+    this.cdr.detectChanges();
     this.downloadService.getFileList("gallery").subscribe({
       next: data =>{
         this.files = data;

@@ -28,6 +28,7 @@ export class FilePopupComponent implements OnInit {
   private oldTags: string[] = [];
 
   @Output() hidePopup = new EventEmitter();
+  @Output() callRefresh = new EventEmitter();
   tagOptions: string[] = [];
   selectedAddTag: string = "";
 
@@ -53,6 +54,8 @@ export class FilePopupComponent implements OnInit {
 
   setResult(event: CustomEvent<OverlayEventDetail>) {
     console.log(`Dismissed with role: ${event.detail.role}`);
+    this.callRefresh.emit();
+    this.hidePopup.emit();
   }
 
   constructor(private cdr: ChangeDetectorRef, 
