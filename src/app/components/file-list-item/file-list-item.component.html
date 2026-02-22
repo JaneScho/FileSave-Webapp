@@ -1,11 +1,11 @@
-<ion-row class="my-3 list-item" (click)="emitItemClicked()">
+<ion-row class="my-3 list-item ion-align-items-center" (click)="emitItemClicked()">
   @if(fileData.isFolder){
     <ion-icon name="folder-open-outline" class="fs-4 center-vertical"></ion-icon>
   }
   @else{
     <ion-icon name="document-outline" class="fs-4 center-vertical"></ion-icon>
   }
-  <span class="ms-1 fs-4">{{fileData.filename}}</span>
+  <span class="ms-1 item-label">{{fileData.filename}}</span>
   @for(tag of fileData.tags; track $index){
     <label class="tag">{{tag}}</label>
   }

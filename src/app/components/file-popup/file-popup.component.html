@@ -1,13 +1,10 @@
 <div class="popup-inner">
-  <ion-row class="ion-justify-content-between">
-    <h3>
-      Dateiname: <span>{{ fileData.filename }}</span>
-    </h3>
+  <ion-row class="ion-justify-content-end">
     <button (click)="callHidePopup()" class="close-button">
-      <ion-icon name="close-outline" class="fs-4"></ion-icon>
-    </button>
+    <ion-icon name="close-outline" class=" fs-4"></ion-icon>
+  </button>
   </ion-row>
-
+  <h3> Dateiname: <span>{{ fileData.filename }}</span></h3>
   <h5>Pfad: {{ fileData.filepath }}</h5>
   <hr />
   <h4>Tags:</h4>
@@ -27,14 +24,18 @@
       (onValueChanged)="onInputChange($event)"
       class="ion-display-flex ion-flex-1 ion-margin"
     ></cmp-searching-text-input>
-    <ion-button (click)="addTag(selectedAddTag)"><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
+    <ion-button (click)="addTag(selectedAddTag)"
+      ><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
     ></ion-button>
   </ion-row>
 
-  <ion-row class="ion-justify-content-center ">
-    <ion-button class="action" (click)="downloadFile()"><ion-icon name="download-outline"></ion-icon></ion-button>
+  <ion-row class="ion-justify-content-center">
+    <ion-button class="action" (click)="downloadFile()"
+      ><ion-icon name="download-outline"></ion-icon
+    ></ion-button>
     <ion-button class="action" (click)="editFile()">Speichern</ion-button>
-    <ion-button class="action" (click)="deleteFile()"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    <ion-button class="action" (click)="deleteFile()"
+      ><ion-icon name="trash-outline"></ion-icon
+    ></ion-button>
   </ion-row>
-
 </div>
