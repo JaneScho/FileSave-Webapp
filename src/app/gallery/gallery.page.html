@@ -19,7 +19,9 @@
     <ion-grid>
       <ion-row>
         @for(file of files;track $index){
-          <cmp-gallery-image [fileData]="file"></cmp-gallery-image>
+          <ion-col size="6" size-sm="6" size-md="3">
+            <cmp-gallery-image (click)="callShowPopup(file)" [fileData]="file"></cmp-gallery-image>
+          </ion-col>
         }
       </ion-row>
     </ion-grid>

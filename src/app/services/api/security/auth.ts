@@ -22,6 +22,7 @@ export class AuthService {
       this.router.navigate(['/tabs/gallery']);
     } else {
       console.log('No valid token found yet. Staying on login page.');
+      this.router.navigate(['/login']);
     }
   }).catch(err => {
     console.error('Handshake failed:', err);

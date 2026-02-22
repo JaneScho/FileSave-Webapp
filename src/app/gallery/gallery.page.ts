@@ -61,6 +61,12 @@ export class GalleryPage implements OnInit {
     }
   }
 
+  callShowPopup(file: FileListDTO){
+    this.showPopup = true;
+    this.selectedFile = file;
+    this.cdr.detectChanges();
+  }
+
   hidePopup(){
     this.showPopup = false;
     this.cdr.detectChanges();
