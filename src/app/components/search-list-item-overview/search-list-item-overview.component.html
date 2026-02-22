@@ -1,0 +1,18 @@
+<div class="popup-inner">
+  <ion-row class="ion-justify-content-end">
+    <button (click)="callHidePopup()" class="close-button">
+    <ion-icon name="close-outline" class=" fs-4"></ion-icon>
+  </button>
+  </ion-row>
+  <h3> Dateiname: <span>{{ fileData.filename }}</span></h3>
+  <h5>Pfad: {{ fileData.filepath }}</h5>
+  <hr />
+  <h4>Tags:</h4>
+  <div class="ion-flex-row tag-area">
+    @for (tag of fileData.tags; track $index) {
+      <cmp-tag-pill
+        [tag]="tag"
+      ></cmp-tag-pill>
+    }
+  </div>
+</div>

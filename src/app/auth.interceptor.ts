@@ -5,7 +5,7 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export const myAuthInterceptor: HttpInterceptorFn = (req, next) => {
 
   const skipUrls = [
-    'nominatim.openstreetmap.org',
+    'https://api.bigdatacloud.net/data/reverse-geocode-client',
     // add other external APIs here
   ];
 

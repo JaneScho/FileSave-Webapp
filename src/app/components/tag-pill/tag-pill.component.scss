@@ -1,0 +1,13 @@
+@import 'src/global.scss';
+
+div{
+    display: inline-flex;
+    margin: 5px;
+    background-color: $primary;
+    border-radius: 12px;
+    padding: 4px 5px;
+}
+
+span{
+    color: $dark-gray;
+}

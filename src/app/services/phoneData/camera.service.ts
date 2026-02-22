@@ -20,7 +20,7 @@ export class CameraService {
     const fileResponse = await fetch(image.webPath!);
     const fileBlob = await fileResponse.blob();
 
-    const filename = `photo_${new Date().getTime()}`;
+    const filename = `photo_${new Date().getTime()}_.${image.format}`;
     console.log("Filename: ", filename);
     formData.append('file', fileBlob);
     formData.append('filename', filename);

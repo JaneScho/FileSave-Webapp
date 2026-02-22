@@ -1,0 +1,59 @@
+@import 'src/global.scss';
+
+h3{
+    margin-top: 0;
+}
+
+.popup-inner {
+    /* From https://css.glass */
+    background: #cacacac7;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid $tinted-gray;
+
+    max-width: 90%;
+    min-width: 50%;
+    min-height: fit-content;
+    max-height: 75%;
+    overflow-y: scroll;
+    padding: 7px 15px;
+    margin: auto;
+}
+
+.tag-area{
+    display: inherit;
+    min-height: 50px;
+    max-height: 150px;
+    padding: 5px;
+    overflow-y: scroll;
+    background: radial-gradient(circle, #abc1bf 80%, $tinted-gray 94%);
+    border: 1px solid $light-gray;
+}
+
+ion-button{
+    --border-radius: 8px;
+    --padding-top: 2px !important;
+    --padding-bottom: 2px !important;
+    --padding-end: 4px !important;
+    --padding-start: 4px !important;
+}
+
+.close-button{
+    color: $primary-dark;
+    font-weight: bolder;
+    font-size: 36px;
+    background: none;
+}
+
+.close-button:hover{
+    color: $contrast;
+    font-weight: bolder;
+    background: none;
+}
+
+.action{
+    z-index: 0;
+}
+
