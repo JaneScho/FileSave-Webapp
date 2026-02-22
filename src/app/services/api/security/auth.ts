@@ -18,6 +18,7 @@ export class AuthService {
 
     if (this.oauthService.hasValidAccessToken()) {
       console.log('Token is valid! Navigating to gallery...');
+      this.checkIdentity();
       this.router.navigate(['/tabs/gallery']);
     } else {
       console.log('No valid token found yet. Staying on login page.');
@@ -34,4 +35,14 @@ export class AuthService {
   public logout() {
     this.oauthService.logOut();
   }
+
+  checkIdentity() {
+  const claims = this.oauthService.getIdentityClaims();
+  console.log('Full Token Claims:', claims);
+  
+  if (claims) {
+    console.log('Principal Name (sub):', claims['sub']); 
+    console.log('Username (preferred_username):', claims['preferred_username']);
+  }
+}
 }

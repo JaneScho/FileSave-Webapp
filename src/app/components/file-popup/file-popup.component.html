@@ -19,11 +19,12 @@
       ></cmp-tag-input-label>
     }
   </div>
+
   <ion-row class="my-3 ion-align-items-center ion-justify-content-between">
     <ion-label>Tag hinzufügen</ion-label>
     <cmp-searching-text-input
       [options]="tagOptions"
-      (onValueChanged)="selectedAddTag = $event"
+      (onValueChanged)="onInputChange($event)"
       class="ion-display-flex ion-flex-1 ion-margin"
     ></cmp-searching-text-input>
     <ion-button (click)="addTag(selectedAddTag)"><ion-icon name="add-circle-outline" class="fs-4 text-dark"></ion-icon
@@ -31,8 +32,9 @@
   </ion-row>
 
   <ion-row class="ion-justify-content-center ">
-    <ion-button class="action"><ion-icon name="download-outline"></ion-icon></ion-button>
-    <ion-button class="action" >Speichern</ion-button>
-    <ion-button class="action"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    <ion-button class="action" (click)="downloadFile()"><ion-icon name="download-outline"></ion-icon></ion-button>
+    <ion-button class="action" (click)="editFile()">Speichern</ion-button>
+    <ion-button class="action" (click)="deleteFile()"><ion-icon name="trash-outline"></ion-icon></ion-button>
   </ion-row>
+
 </div>

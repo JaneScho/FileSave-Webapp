@@ -18,7 +18,8 @@
     </div>
     <hr />
     <div class="file-container">
-      @for(file of files; track $index){
+      @for(file of files$ | async; track file)
+  {
       <cmp-file-list-item
         [file-data]="file"
         (itemClicked)="listItemSelected($event)"
@@ -28,6 +29,6 @@
   </div>
 
   @if(showPopup){
-    <page-file-popup [file-data]="selectedFile" (hidePopup)="hidePopup()"></page-file-popup>
+    <page-file-popup [file-data]="selectedFile" [download-type]="'file'" (hidePopup)="hidePopup()"></page-file-popup>
   }
 </ion-content>

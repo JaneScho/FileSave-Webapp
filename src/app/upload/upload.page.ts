@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 
-import { Upload } from '../services/api/upload';
+import { Upload } from '../services/api/uploadService';
 import { Tags } from '../services/api/tags';
 import { Observable, Subject, debounceTime, switchMap, of } from 'rxjs';
 import { map } from 'rxjs/operators';

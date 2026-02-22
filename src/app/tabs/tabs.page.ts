@@ -1,10 +1,10 @@
 import { Component, EnvironmentInjector, inject } from '@angular/core';
 import { IonFabList, IonTabs, IonTabBar, IonTabButton, IonIcon, IonMenu, IonLabel, IonFab, IonFabButton, IonButton, IonMenuButton, IonButtons, IonList, IonContent } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline, barChartOutline, settingsOutline, menuOutline, folderOutline, searchOutline, shareSocialOutline, } from 'ionicons/icons';
+import { downloadOutline, closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline, barChartOutline, settingsOutline, menuOutline, folderOutline, searchOutline, shareSocialOutline, } from 'ionicons/icons';
 import { CameraService } from '../services/camera.service';
 import { LocationService } from '../services/location.service';
-import { Upload } from '../services/api/upload';
+import { Upload } from '../services/api/uploadService';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';
