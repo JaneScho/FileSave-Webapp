@@ -4,7 +4,7 @@ import { addIcons } from 'ionicons';
 import { downloadOutline, closeSharp, pushOutline, cameraOutline, listOutline, imagesOutline, image, folder, shareSocial, search, settings, cloudUploadOutline, barChartOutline, settingsOutline, menuOutline, folderOutline, searchOutline, shareSocialOutline, } from 'ionicons/icons';
 import { CameraService } from '../services/camera.service';
 import { LocationService } from '../services/location.service';
-import { Upload } from '../services/api/upload';
+import { Upload } from '../services/api/uploadService';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 import { HttpClient } from '@angular/common/http';

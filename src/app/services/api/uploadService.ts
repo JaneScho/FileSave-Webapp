@@ -23,7 +23,8 @@ export class Upload {
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('filename', filename);
+    const nameWithoutExtension = filename.substring(0, filename.lastIndexOf('.'));
+    formData.append('filename', nameWithoutExtension);
 
     //Umformatieren des filetypes:
     let fileExtension = filetype;

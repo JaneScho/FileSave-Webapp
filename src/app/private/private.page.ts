@@ -24,12 +24,7 @@ export class PrivatePage implements OnInit{
   currentPath: string = '';
 
   constructor(private cdr: ChangeDetectorRef, private downloadService: Download) {
-    /*
-    this.files = [{filename: 'TestFile.txt', filepath: '/', isFolder: false, tags: ['testTag', 'testTag2', "aawdawdaw", "bawdawda", "boadawdawdawdawd"]} as FileListDTO, 
-                  {filename: 'Bob.txt', filepath: '/', isFolder: false, tags: []} as FileListDTO,
-                  {filename: 'BobFolder', filepath: '/', isFolder: true, tags: []} as FileListDTO]
-  */
-                  }
+  }
 
   ngOnInit(){
       this.loadFiles();
