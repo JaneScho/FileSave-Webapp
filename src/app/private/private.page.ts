@@ -11,6 +11,9 @@ import { AuthService } from '../services/api/security/auth';
 import { addIcons } from 'ionicons';
 import { logOutOutline, reloadOutline } from 'ionicons/icons';
 import { cutPath, getUpPath } from 'src/tools/tools';
+import { CameraService } from '../services/phoneData/camera.service';
+import { LocationService } from '../services/phoneData/location.service';
+import { Upload } from '../services/api/uploadService';
 
 @Component({
   selector: 'app-private',
@@ -28,7 +31,8 @@ export class PrivatePage implements OnInit {
   folderUpPossible: Boolean = false;
   currentPath: string = '';
 
-  constructor(private cdr: ChangeDetectorRef, private downloadService: Download, public auth: AuthService, private router: Router) {
+  constructor(private cdr: ChangeDetectorRef, private downloadService: Download, public auth: AuthService, private router: Router,
+    public cameraService: CameraService, public locationService: LocationService, public uploadService: Upload) {
     addIcons({ reloadOutline, logOutOutline });
   }
 
@@ -71,5 +75,33 @@ export class PrivatePage implements OnInit {
 
   getUpPath(): string {
     return getUpPath(this.currentPath);
+  }
+
+
+  async takeNewPhoto(){
+
+    try {
+    const location = await this.locationService.getLocationName();
+    console.log('Current location:', location);
+
+    const formData = await this.cameraService.takeNewPicture();
+
+    const tags: string[] = [location];
+
+    this.uploadService.uploadFile(
+      "gallery",
+      formData.get('file') as Blob,
+      formData.get('filename') as string,
+      formData.get('fileType') as string,
+      'APPEND_NUMBER',
+      tags
+    ).subscribe({
+      next: (res) => console.log('Upload Success:', res),
+      error: (err) => console.error('Upload Error:', err)
+    });
+
+  } catch (err) {
+    console.error('Process failed:', err);
+  }
   }
 }

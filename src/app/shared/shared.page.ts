@@ -9,6 +9,9 @@ import { AuthService } from '../services/api/security/auth';
 import { Observable } from 'rxjs';
 import { Download } from '../services/api/download';
 import { cutPath, getUpPath } from 'src/tools/tools';
+import { CameraService } from '../services/phoneData/camera.service';
+import { LocationService } from '../services/phoneData/location.service';
+import { Upload } from '../services/api/uploadService';
 
 @Component({
   selector: 'app-shared',
@@ -23,7 +26,8 @@ export class SharedPage {
   folderUpPossible: Boolean = false;
   currentPath: string = '';
 
-  constructor(private downloadService: Download, private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router) {
+  constructor(private downloadService: Download, private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router,
+    public cameraService: CameraService, public locationService: LocationService, public uploadService: Upload) {
   }
 
   ngOnInit(){
@@ -61,5 +65,33 @@ export class SharedPage {
 
   getUpPath(): string{
     return getUpPath(this.currentPath);
+  }
+
+
+  async takeNewPhoto(){
+
+    try {
+    const location = await this.locationService.getLocationName();
+    console.log('Current location:', location);
+
+    const formData = await this.cameraService.takeNewPicture();
+
+    const tags: string[] = [location];
+
+    this.uploadService.uploadFile(
+      "gallery",
+      formData.get('file') as Blob,
+      formData.get('filename') as string,
+      formData.get('fileType') as string,
+      'APPEND_NUMBER',
+      tags
+    ).subscribe({
+      next: (res) => console.log('Upload Success:', res),
+      error: (err) => console.error('Upload Error:', err)
+    });
+
+  } catch (err) {
+    console.error('Process failed:', err);
+  }
   }
 }

@@ -1,9 +1,6 @@
 <ion-header class="ion-hide-sm-up mobile-header" [translucent]="true">
   <ion-toolbar class="mobile-header-inner">
     <ion-row>
-      <button class="header-btn">
-        <ion-icon name="reload-outline"></ion-icon>
-      </button>
       <ion-title class="ion-text-center"> Dateisuche mit Tags </ion-title>
       <button class="header-btn" (click)="logout()">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -12,13 +9,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollY]="!showPopup">
   <ion-header collapse="condense" class="ion-hide-sm-up mobile-header">
     <ion-toolbar class="mobile-header-inner">
     <ion-row>
-      <button class="header-btn">
-        <ion-icon name="reload-outline"></ion-icon>
-      </button>
       <ion-title class="ion-text-center"> Dateisuche mit Tags </ion-title>
       <button class="header-btn" (click)="logout()">
         <ion-icon name="log-out-outline"></ion-icon>
@@ -29,24 +23,11 @@
 
   <div class="body">
     <ion-row class="wide-header ion-hide-sm-down ion-justify-content-between">
-      
-      <div class="header-btn-container">
-        <ion-fab vertical="top" horizontal="start" class="">
-          <ion-fab-button class="wide-title-button">
-            <ion-icon name="cloud-upload-outline"></ion-icon>
-          </ion-fab-button>
+      <div class="wide-title-box">
+        <h2>Suche</h2>
+      </div>
 
-          <ion-fab-list side="bottom">
-            <ion-fab-button class="fab-extend-btn" (click)="logout()">
-              <ion-icon name="camera-outline" size="large"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button class="fab-extend-btn" [routerLink]="['/tabs/upload']">
-              <ion-icon name="push-outline" size="large"></ion-icon>
-            </ion-fab-button>
-          </ion-fab-list>
-        </ion-fab>
-        
-        <button class="wide-title-button"><ion-icon name="reload-outline" class="fs-4"></ion-icon></button>
+      <div class="header-btn-container">
         <button class="wide-title-button" (click)="logout()"><ion-icon name="log-out-outline" class="fs-4"></ion-icon></button>
       </div>
     

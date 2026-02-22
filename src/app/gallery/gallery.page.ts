@@ -12,6 +12,9 @@ import { addIcons } from 'ionicons';
 import { logOutOutline, reloadOutline } from 'ionicons/icons';
 import { AuthService } from '../services/api/security/auth';
 import { Router, RouterLink } from '@angular/router';
+import { LocationService } from '../services/phoneData/location.service';
+import { CameraService } from '../services/phoneData/camera.service';
+import { Upload } from '../services/api/uploadService';
 
 @Component({
   selector: 'app-gallery',
@@ -31,7 +34,8 @@ export class GalleryPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name!: string;
 
-  constructor(public downloadService: Download, private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router) { 
+  constructor(public downloadService: Download, private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router,
+    public cameraService: CameraService, public locationService: LocationService, public uploadService: Upload) { 
     addIcons({reloadOutline, logOutOutline});
   }
 
@@ -82,4 +86,31 @@ export class GalleryPage implements OnInit {
     this.cdr.detectChanges();
   }
 
+
+  async takeNewPhoto(){
+
+    try {
+    const location = await this.locationService.getLocationName();
+    console.log('Current location:', location);
+
+    const formData = await this.cameraService.takeNewPicture();
+
+    const tags: string[] = [location];
+
+    this.uploadService.uploadFile(
+      "gallery",
+      formData.get('file') as Blob,
+      formData.get('filename') as string,
+      formData.get('fileType') as string,
+      'APPEND_NUMBER',
+      tags
+    ).subscribe({
+      next: (res) => console.log('Upload Success:', res),
+      error: (err) => console.error('Upload Error:', err)
+    });
+
+  } catch (err) {
+    console.error('Process failed:', err);
+  }
+  }
 }
