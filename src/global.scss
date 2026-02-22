@@ -79,16 +79,17 @@ $contrast: #3084F2;
 }
 
 
-*{
+* {
     font-family: var(--ion-font-family) !important;
 }
 
-body, ion-app{
+body,
+ion-app {
     background: #E6E6CF;
     background: radial-gradient(circle, #e6e6cf 0%, #abc1bf 94%);
 }
 
-ion-item.input{
+ion-item.input {
     padding: 2px;
     margin: 5px 5%;
     box-shadow: 0px 0px 7px var(--ion-background-color);
@@ -100,54 +101,54 @@ ion-item.input{
     --background: rgba(218, 229, 231, 0.20);
 }
 
-cmp-tag-input-label{
+cmp-tag-input-label {
     display: inline-flex;
     max-width: fit-content;
 }
 
-.tag-area{
+.tag-area {
     display: grid;
     border-radius: 8px;
     background-color: $tinted-gray;
 }
 
-.my-3{
+.my-3 {
     margin-top: 30px;
     margin-bottom: 30px;
 }
 
-.mx-auto{
+.mx-auto {
     margin-left: auto;
     margin-right: auto;
 }
 
-.ms-1{
+.ms-1 {
     margin-left: 10px;
 }
 
-.fs-4{
+.fs-4 {
     font-size: 24px;
 }
 
-.w-100{
+.w-100 {
     width: 100%;
 }
 
-.text-dark{
+.text-dark {
     color: $dark-gray;
     --color: $dark-gray;
 }
 
-.center-vertical{
+.center-vertical {
     margin-top: auto;
     margin-bottom: auto;
 }
 
-.display-block{
+.display-block {
     display: block;
 }
 
-.display-flex{
+.display-flex {
     display: flex;
 }
 
@@ -164,6 +165,25 @@ cmp-tag-input-label{
     z-index: 99;
 }
 
-.file-container{
+.file-container {
     padding: 2%;
+}
+
+.mobile-header {
+    width: 90%;
+    margin: 0px auto;
+    border-radius: 0 0 20px 20px;
+    background: #ffffff7c;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+
+    ion-title {
+        --color: $000;
+    }
+}
+
+.mobile-header-inner {
+    background: transparent !important;
+    --background: transparent !important;
 }

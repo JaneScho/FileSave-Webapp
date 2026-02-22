@@ -4,11 +4,11 @@
 
 .popup-inner {
     /* From https://css.glass */
-    background: #d1d1d1b0;
+    background: #cacacac7;
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 2px solid $tinted-gray;
 
     max-width: 90%;
@@ -39,8 +39,19 @@ ion-button{
 }
 
 .close-button{
-    color: $primary;
+    color: $primary-dark;
+    font-weight: bolder;
+    font-size: 36px;
+    background: none;
+}
+
+.close-button:hover{
+    color: $contrast;
     font-weight: bolder;
     background: none;
+}
+
+.action{
+    z-index: 0;
 }
 

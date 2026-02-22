@@ -1,0 +1,8 @@
+<div>
+  @if(fileData && fileData.filename.length > 0){
+    
+      <ion-img [src]="api + fileData.filename" alt="{{fileData.filename}}" (ionImgDidLoad)="imageLoaded()" (ionError)="imageLoadErr()"></ion-img>
+    
+    {{fileData.filename}}
+  }
+</div>
