@@ -57,6 +57,8 @@
   @if(showPopup){
   <page-file-popup
     [file-data]="selectedFile"
+    [download-type]="'gallery'"
+    [edit-type]="'gallery'"
     (hidePopup)="hidePopup()"
   ></page-file-popup>
   }
