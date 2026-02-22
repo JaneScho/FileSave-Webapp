@@ -257,7 +257,7 @@ ion-fab-button.wide-title-button {
     --background-hover: transparent;
 }
 
-.wide-title-button:hover {
+.wide-title-button:hover{
     background: #ebf21b54;
     border-radius: 8px;
     margin-right: 6px;
@@ -283,4 +283,31 @@ ion-fab-button.wide-title-button {
     left: 0;
     top: 0;
     z-index: 10;
+}
+
+.fab-extend-btn{
+    /* From https://css.glass */
+    background: #7f7f7f35;
+    backdrop-filter: blur(7.6px);
+    -webkit-backdrop-filter: blur(7.6px);
+    border: 1px solid #ffffff47;
+    border-radius: 20px;
+    transition: 0.25s ease;
+    font-size: 30px;
+    --font-size: 30px;
+    z-index: 999;
+
+    --background: none;
+    --box-shadow: none;
+    --padding: 0;
+    --color: white;
+    --background-hover: transparent;
+}
+
+.fab-extend-btn:hover{
+    background: #ebf21b54;
+    border-radius: 8px;
+    --background: none !important;
+    --box-shadow: none !important;
+    --padding: 0;
 }

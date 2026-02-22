@@ -7,11 +7,11 @@
         </ion-fab-button>
 
         <ion-fab-list side="top">
-          <ion-fab-button (click)="takeNewPhoto()">
-            <ion-icon name="camera-outline" size="large"></ion-icon>
+          <ion-fab-button class="fab-extend-btn" (click)="takeNewPhoto()">
+            <ion-icon name="camera-outline"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button [routerLink]="['/tabs/upload']">
-            <ion-icon name="push-outline" size="large"></ion-icon>
+          <ion-fab-button class="fab-extend-btn" [routerLink]="['/tabs/upload']">
+            <ion-icon name="push-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
