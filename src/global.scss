@@ -176,7 +176,7 @@ cmp-tag-input-label {
     background: #ffffff7c;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-
+    z-index: 400;
 
     ion-title {
         --color: $000;
@@ -188,6 +188,9 @@ cmp-tag-input-label {
     --background: transparent !important;
 }
 
+
+
+
 .tag {
     display: inline-flex;
     margin: 5px;
@@ -197,7 +200,7 @@ cmp-tag-input-label {
     color: $dark-gray;
 }
 
-.header-btn{
+.header-btn {
     background: none;
     color: #566873;
     font-size: 36px;
@@ -205,6 +208,54 @@ cmp-tag-input-label {
     margin-right: 15px;
 }
 
-.header-btn:hover{
+.header-btn:hover {
     color: $primary-dark;
+}
+
+.wide-header{
+    margin: 30px 2% 0px 2%;
+}
+
+.wide-title-box {
+    display: block;
+    max-width: fit-content;
+    padding: 12px 15px;
+    /* From https://css.glass */
+    background: #ffffff6e;
+    box-shadow: 0 4px 30px #0000001a;
+    backdrop-filter: blur(7.6px);
+    -webkit-backdrop-filter: blur(7.6px);
+    border: 1px solid #ffffff47;
+    border-radius: 20px;
+
+    max-width: 230px;
+
+    h2{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+.wide-title-button{
+    padding: 12px 15px;
+    /* From https://css.glass */
+    background: #7f7f7f6e;
+    backdrop-filter: blur(7.6px);
+    -webkit-backdrop-filter: blur(7.6px);
+    border: 1px solid #ffffff47;
+    border-radius: 20px;
+    margin-right: 5px;
+    transition: 0.25s ease;
+    z-index: 999;
+}
+
+.wide-title-button:hover{
+    background: #ebf21b54;
+    border-radius: 8px;
+    margin-right: 6px;
+    margin-left: 1px;
+}
+
+.mobile-header-inner {
+  pointer-events: none; /* Re-enable clicks for the actual buttons */
 }

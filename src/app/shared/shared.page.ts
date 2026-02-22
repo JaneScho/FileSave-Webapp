@@ -17,6 +17,7 @@ export class SharedPage {
   showPopup: Boolean = false;
   files: FileListDTO[] = [];
   selectedFile !: FileListDTO; 
+  currentPath: string = '';
 
   constructor(private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router) {
     this.files = [{filename: 'TestFile.txt', filepath: '/', isFolder: false, tags: ['testTag', 'testTag2', "aawdawdaw", "bawdawda", "boadawdawdawdawd"]} as FileListDTO, 

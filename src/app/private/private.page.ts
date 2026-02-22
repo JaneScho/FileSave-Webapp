@@ -1,6 +1,6 @@
 import { FileListDTO } from './../services/interfaces/dtos';
 import { ChangeDetectorRef, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon, IonText } from '@ionic/angular/standalone';
 import { FileListItemComponent } from '../components/file-list-item/file-list-item.component';
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { logOutOutline, reloadOutline } from 'ionicons/icons';
   selector: 'app-private',
   templateUrl: 'private.page.html',
   styleUrls: ['private.page.scss'],
-  imports: [IonIcon, IonRow, AsyncPipe,
+  imports: [IonText, IonIcon, IonRow, AsyncPipe,
     IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
 })
 export class PrivatePage implements OnInit {

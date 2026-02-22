@@ -1,37 +1,52 @@
 <ion-header class="ion-hide-sm-up mobile-header" [translucent]="true">
   <ion-toolbar class="mobile-header-inner">
     <ion-row>
-      <button class="header-btn" (click)="loadFiles()"><ion-icon name="reload-outline"></ion-icon></button>
+      <button class="header-btn" (click)="loadFiles()">
+        <ion-icon name="reload-outline"></ion-icon>
+      </button>
       <ion-title class="ion-text-center"> Private Dateien </ion-title>
-      <button class="header-btn" (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></button>
+      <button class="header-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
     </ion-row>
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense" class="ion-hide-sm-up mobile-header">
     <ion-toolbar class="mobile-header-inner">
-      <ion-title class="ion-text-center" size="large"
-        >Private Dateien</ion-title
-      >
-    </ion-toolbar>
+    <ion-row>
+      <button class="header-btn" (click)="loadFiles()">
+        <ion-icon name="reload-outline"></ion-icon>
+      </button>
+      <ion-title class="ion-text-center"> Private Dateien </ion-title>
+      <button class="header-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-toolbar>
   </ion-header>
 
   <div class="body">
-    <div class="ion-hide-sm-down">
-      <h2>Private Dateien</h2>
-      <sub>Pfad: </sub>
-    </div>
+    <ion-row class="wide-header ion-hide-sm-down ion-justify-content-between">
+      <div class="wide-title-box">
+        <h2>Private Dateien</h2>
+        <span>Pfad: {{currentPath}}</span>
+      </div>
+      <div>
+        <button class="wide-title-button" (click)="loadFiles()"><ion-icon name="reload-outline" class="fs-4"></ion-icon></button>
+        <button class="wide-title-button" (click)="logout()"><ion-icon name="log-out-outline" class="fs-4"></ion-icon></button>
+      </div>
+    </ion-row>
+
     <hr />
     <div class="file-container">
       @if(folderUpPossible){
-        <cmp-file-list-item
+      <cmp-file-list-item
         [file-data]="{filename: '..', filepath: getUpPath(), isFolder: true, tags: [] }"
         (itemClicked)="listItemSelected($event)"
       ></cmp-file-list-item>
-      }
-      @for(file of files$ | async; track file) {
+      } @for(file of files$ | async; track file) {
       <cmp-file-list-item
         [file-data]="file"
         (itemClicked)="listItemSelected($event)"

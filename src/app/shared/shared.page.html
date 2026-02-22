@@ -16,10 +16,16 @@
   </ion-header>
 
   <div class="body">
-    <div class="ion-hide-sm-down">
-      <h2>Geteilte Dateien</h2>
-      <sub>Pfad: </sub>
-    </div>
+    <ion-row class="wide-header ion-hide-sm-down ion-justify-content-between">
+      <div class="wide-title-box">
+        <h2>Geteilte Dateien</h2>
+        <span>Pfad: {{currentPath}}</span>
+      </div>
+      <div>
+        <button class="wide-title-button" (click)="loadFiles()"><ion-icon name="reload-outline" class="fs-4"></ion-icon></button>
+        <button class="wide-title-button" (click)="logout()"><ion-icon name="log-out-outline" class="fs-4"></ion-icon></button>
+      </div>
+    </ion-row>
     <hr />
     <div class="file-container">
       @for(file of files; track $index){
