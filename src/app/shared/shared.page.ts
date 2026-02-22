@@ -1,10 +1,10 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 import { AsyncPipe } from '@angular/common';
 import { FileListItemComponent } from "../components/file-list-item/file-list-item.component";
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { FileListDTO } from '../services/interfaces/dtos';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/api/security/auth';
 import { Observable } from 'rxjs';
 import { Download } from '../services/api/download';
@@ -14,7 +14,7 @@ import { cutPath, getUpPath } from 'src/tools/tools';
   selector: 'app-shared',
   templateUrl: 'shared.page.html',
   styleUrls: ['shared.page.scss'],
-  imports: [IonIcon, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent, AsyncPipe],
+  imports: [IonFabList, IonFabButton, IonFab, IonIcon, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, RouterLink, FilePopupComponent, AsyncPipe],
 })
 export class SharedPage {
   showPopup: Boolean = false;

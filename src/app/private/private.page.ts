@@ -1,12 +1,12 @@
 import { FileListDTO } from './../services/interfaces/dtos';
 import { ChangeDetectorRef, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon, IonText } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon, IonText, IonFab, IonFabButton, IonFabList } from '@ionic/angular/standalone';
 import { FileListItemComponent } from '../components/file-list-item/file-list-item.component';
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { Observable } from 'rxjs';
 import { Download } from '../services/api/download';
 import { AsyncPipe } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/api/security/auth';
 import { addIcons } from 'ionicons';
 import { logOutOutline, reloadOutline } from 'ionicons/icons';
@@ -16,13 +16,12 @@ import { cutPath, getUpPath } from 'src/tools/tools';
   selector: 'app-private',
   templateUrl: 'private.page.html',
   styleUrls: ['private.page.scss'],
-  imports: [IonText, IonIcon, IonRow, AsyncPipe,
-    IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
+  imports: [IonFabList, IonFabButton, IonFab, IonText, IonIcon, IonRow, AsyncPipe,
+    IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent, RouterLink]
 })
 export class PrivatePage implements OnInit {
   @ViewChild('popup') popup !: FilePopupComponent;
   showPopup: Boolean = false;
-  //files: FileListDTO[] = [];
   files$!: Observable<FileListDTO[]>;
   selectedFile !: FileListDTO;
 

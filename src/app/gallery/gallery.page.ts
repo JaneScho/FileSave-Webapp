@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { IonInput, IonModal, IonChip, IonLabel, IonRow, IonCol, IonGrid, IonItem, IonList, IonButtons, IonButton, IonFab, IonFabButton, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
+import { IonInput, IonModal, IonChip, IonLabel, IonRow, IonCol, IonGrid, IonItem, IonList, IonButtons, IonButton, IonFab, IonFabButton, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonFabList } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core/components';
 
@@ -11,13 +11,13 @@ import { GalleryImageComponent } from "../components/gallery-image/gallery-image
 import { addIcons } from 'ionicons';
 import { logOutOutline, reloadOutline } from 'ionicons/icons';
 import { AuthService } from '../services/api/security/auth';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
   templateUrl: 'gallery.page.html',
   styleUrls: ['gallery.page.scss'],
-  imports: [FormsModule,IonCol, IonRow, IonGrid,IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, FilePopupComponent, GalleryImageComponent],
+  imports: [IonFabList, FormsModule, IonCol, IonRow, IonGrid, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, FilePopupComponent, RouterLink, GalleryImageComponent, IonFab, IonFabButton],
 })
 export class GalleryPage implements OnInit {
 

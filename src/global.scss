@@ -212,7 +212,7 @@ cmp-tag-input-label {
     color: $primary-dark;
 }
 
-.wide-header{
+.wide-header {
     margin: 30px 2% 0px 2%;
 }
 
@@ -230,13 +230,13 @@ cmp-tag-input-label {
 
     max-width: 230px;
 
-    h2{
+    h2 {
         margin-top: 0;
         margin-bottom: 0;
     }
 }
 
-.wide-title-button{
+.wide-title-button {
     padding: 12px 15px;
     /* From https://css.glass */
     background: #7f7f7f6e;
@@ -249,13 +249,38 @@ cmp-tag-input-label {
     z-index: 999;
 }
 
-.wide-title-button:hover{
+ion-fab-button.wide-title-button {
+    --background: none;
+    --box-shadow: none;
+    --padding: 0;
+    --color: white;
+    --background-hover: transparent;
+}
+
+.wide-title-button:hover {
     background: #ebf21b54;
     border-radius: 8px;
     margin-right: 6px;
     margin-left: 1px;
+    --background: none !important;
+    --box-shadow: none !important;
+    --padding: 0;
 }
 
 .mobile-header-inner {
-  pointer-events: none; /* Re-enable clicks for the actual buttons */
+    pointer-events: none;
+    /* Re-enable clicks for the actual buttons */
+}
+
+.header-btn-container {
+    position: relative;
+    display: flex;
+    height: fit-content;
+}
+
+.header-btn-container ion-fab {
+    position: relative;
+    left: 0;
+    top: 0;
+    z-index: 10;
 }

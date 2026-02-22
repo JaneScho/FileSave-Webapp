@@ -21,7 +21,21 @@
         <h2>Geteilte Dateien</h2>
         <span>Pfad: {{currentPath}}</span>
       </div>
-      <div>
+      <div class="header-btn-container">
+        <ion-fab vertical="top" horizontal="start" class="">
+          <ion-fab-button class="wide-title-button">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+          </ion-fab-button>
+
+          <ion-fab-list side="bottom">
+            <ion-fab-button (click)="logout()">
+              <ion-icon name="camera-outline" size="large"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button [routerLink]="['/tabs/upload']">
+              <ion-icon name="push-outline" size="large"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
         <button class="wide-title-button" (click)="loadFiles()"><ion-icon name="reload-outline" class="fs-4"></ion-icon></button>
         <button class="wide-title-button" (click)="logout()"><ion-icon name="log-out-outline" class="fs-4"></ion-icon></button>
       </div>
