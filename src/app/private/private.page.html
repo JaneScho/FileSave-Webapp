@@ -25,6 +25,12 @@
     </div>
     <hr />
     <div class="file-container">
+      @if(folderUpPossible){
+        <cmp-file-list-item
+        [file-data]="{filename: '..', filepath: getUpPath(), isFolder: true, tags: [] }"
+        (itemClicked)="listItemSelected($event)"
+      ></cmp-file-list-item>
+      }
       @for(file of files$ | async; track file) {
       <cmp-file-list-item
         [file-data]="file"

@@ -18,34 +18,40 @@ import { logOutOutline, reloadOutline } from 'ionicons/icons';
   imports: [IonIcon, IonRow, AsyncPipe,
     IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
 })
-export class PrivatePage implements OnInit{
+export class PrivatePage implements OnInit {
   @ViewChild('popup') popup !: FilePopupComponent;
   showPopup: Boolean = false;
   //files: FileListDTO[] = [];
   files$!: Observable<FileListDTO[]>;
-  selectedFile !: FileListDTO; 
+  selectedFile !: FileListDTO;
 
+  folderUpPossible: Boolean = false;
   currentPath: string = '';
 
   constructor(private cdr: ChangeDetectorRef, private downloadService: Download, public auth: AuthService, private router: Router) {
-    addIcons({reloadOutline, logOutOutline});
+    addIcons({ reloadOutline, logOutOutline });
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.loadFiles();
+  }
+
+  loadFiles() {
+    this.files$ = this.downloadService.getFileList("files", this.currentPath);
+    const cutPattern = 'files/';
+    this.folderUpPossible = this.currentPath.length > 1;
+    this.cdr.detectChanges();
+  }
+
+
+  listItemSelected(fileData: FileListDTO) {
+    if (fileData.isFolder) {
+      //TODO Navigate to new folder
+      this.currentPath = this.cutPath(fileData.filepath);
+      console.log(this.currentPath);
       this.loadFiles();
     }
-  
-    loadFiles(){
-      this.files$ = this.downloadService.getFileList("files", this.currentPath);
-      this.cdr.detectChanges();
-    }
-
-
-  listItemSelected(fileData: FileListDTO){
-    if(fileData.isFolder){
-      //TODO Navigate to new folder
-    }
-    else{
+    else {
       //TODO show popup for file
       this.showPopup = true;
       this.selectedFile = fileData;
@@ -53,13 +59,28 @@ export class PrivatePage implements OnInit{
     }
   }
 
-  logout(){
+  logout() {
     this.auth.logout();
     this.router.navigate(['/login']);
   }
 
-  hidePopup(){
+  hidePopup() {
     this.showPopup = false;
     this.cdr.detectChanges();
+  }
+
+  cutPath(fullPath: string): string {
+    const cutPattern = 'files/';
+    var cutIndex = fullPath.indexOf(cutPattern);
+    if(cutIndex < 0)
+      return fullPath;
+    return fullPath.substring(cutIndex + cutPattern.length - 1);
+  }
+
+  getUpPath(): string{
+    const cutIndex = this.currentPath.lastIndexOf('/');
+    if(cutIndex < 0)
+      return this.currentPath;
+    return this.currentPath.substring(0,cutIndex);
   }
 }
