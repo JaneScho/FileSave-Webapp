@@ -1,9 +1,13 @@
 <ion-header class="ion-hide-sm-up mobile-header" [translucent]="true">
   <ion-toolbar class="mobile-header-inner">
     <ion-row>
-      <button class="header-btn" (click)="loadFiles()"><ion-icon name="reload-outline"></ion-icon></button>
-      <ion-title class="ion-text-center"> Dateisuche </ion-title>
-      <button class="header-btn" (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></button>
+      <button class="header-btn">
+        <ion-icon name="reload-outline"></ion-icon>
+      </button>
+      <ion-title class="ion-text-center"> Dateisuche mit Tags </ion-title>
+      <button class="header-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
     </ion-row>
   </ion-toolbar>
 </ion-header>
@@ -11,49 +15,70 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense" class="ion-hide-sm-up mobile-header">
     <ion-toolbar class="mobile-header-inner">
-      <ion-title class="ion-text-center" size="large">Geteilte Dateien</ion-title>
-    </ion-toolbar>
+    <ion-row>
+      <button class="header-btn">
+        <ion-icon name="reload-outline"></ion-icon>
+      </button>
+      <ion-title class="ion-text-center"> Dateisuche mit Tags </ion-title>
+      <button class="header-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
+    </ion-row>
+  </ion-toolbar>
   </ion-header>
 
-  <ion-searchbar placeholder="Tag"></ion-searchbar>
+  <div class="body">
+    <ion-row class="wide-header ion-hide-sm-down ion-justify-content-between">
+      
+      <div class="header-btn-container">
+        <ion-fab vertical="top" horizontal="start" class="">
+          <ion-fab-button class="wide-title-button">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+          </ion-fab-button>
 
-  <!--placeholder-->
-<ion-list>
-  @for(file of files$ | async; track file)
-  {
-    <ion-item>
-      <ion-label>
-        <h2>{{file.filename}}</h2>
-        <div class="tags">
-          @for (tag of file.tags; track tag) {
-          <ion-chip color="primary" outline="true">
-              <ion-label>{{tag}}</ion-label>
-            </ion-chip>
-          }
-        </div>
-      </ion-label>
+          <ion-fab-list side="bottom">
+            <ion-fab-button class="fab-extend-btn" (click)="logout()">
+              <ion-icon name="camera-outline" size="large"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button class="fab-extend-btn" [routerLink]="['/tabs/upload']">
+              <ion-icon name="push-outline" size="large"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
+        
+        <button class="wide-title-button"><ion-icon name="reload-outline" class="fs-4"></ion-icon></button>
+        <button class="wide-title-button" (click)="logout()"><ion-icon name="log-out-outline" class="fs-4"></ion-icon></button>
+      </div>
+    
+    </ion-row>
 
-      <ion-button slot="end" fill="clear" color="medium">
-        mehr
-      </ion-button>
+    <hr />
 
-    </ion-item>
+    <!--Suchleiste-->
+    <div class="search-section ion-padding-horizontal">
+      <ion-searchbar 
+        placeholder="Suche basierend auf Tag..." 
+        [(ngModel)]="searchTag"
+        (keyup.enter)="triggerSearch()"
+        [debounce]="500">
+      </ion-searchbar>
+    </div>
+
+    <!--Dateianzeige-->
+    <div class="file-container"> 
+      @for(file of files$ | async; track file) {
+      <cmp-search-list-item
+        [file-data]="file"
+        (itemClicked)="listItemSelected($event)"
+      ></cmp-search-list-item>
+      }
+    </div>
+  </div>
+
+  @if(showPopup){
+  <cmp-search-list-item-overview
+    [file-data]="selectedFile"
+    (hidePopup)="hidePopup()"
+  ></cmp-search-list-item-overview>
   }
-</ion-list>
-
-<!--//export interface FileListDTO{
-    filename: string,
-    filepath: string,
-    isFolder: boolean,
-    tags: string[]
-}//-->
-  <!--
-  <ion-list>
-  @for (result of results; track result) {
-  <ion-item>
-    <ion-label>{{ result }}</ion-label>
-  </ion-item>
-  }
-</ion-list>
-  -->
 </ion-content>

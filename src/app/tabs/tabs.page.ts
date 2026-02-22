@@ -32,31 +32,13 @@ export class TabsPage {
   async takeNewPhoto(){
 
     try {
-    // 1. Get User Data using CapacitorHttp (Avoids CORS on localhost)
-    this.http.get<any>('http://indigo-bat-40212.zap.cloud:4582/api/auth/whoami')
-      .subscribe({
-        next: (data) => {
-          this.userName = data.username;
-          console.log('Current location: ', this.userName )
-        },
-        error: (err) => {
-          console.error('Auth failed or CORS error', err);
-          this.userName = 'Unknown User';
-        }
-      });
+    const location = await this.locationService.getLocationName();
+    console.log('Current location:', location);
 
-    // 2. Get Location
-    //const location = await this.locationService.getLocationName();
-    //console.log('Current location:', location);
-
-    // 3. Take Picture
     const formData = await this.cameraService.takeNewPicture();
 
-    // 4. Handle Tags
-    const tags: string[] = ["test"];
+    const tags: string[] = [location];
 
-    // 5. Upload File 
-    // Note: Since uploadFile likely uses Angular HttpClient, we subscribe here
     this.uploadService.uploadFile(
       "gallery",
       formData.get('file') as Blob,
