@@ -1,19 +1,19 @@
 @import 'src/global.scss';
 
-$input-color: #8fa6a6ae;
+
 
 ion-list{
     position: absolute;
     top: 100%;
-    left: 5%;
+    left: 20%;
     max-height: 130px;
     overflow-wrap: break-word;
     overflow-y: scroll;
     overflow-x: auto;
     background: $input-color;
     border-radius: 0 8px 8px 8px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(13px);
+    -webkit-backdrop-filter: blur(13px);
     z-index: 1;
 }
 
@@ -24,10 +24,6 @@ ion-item-option{
 
 ion-item-option:hover{
     background: $primary;
-}
-
-hr{
-    background: $light-gray;
 }
 
 ion-searchbar{

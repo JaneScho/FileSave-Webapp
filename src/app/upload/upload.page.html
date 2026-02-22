@@ -1,31 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Datei hochladen
-    </ion-title>
+<ion-header class="ion-hide-sm-up mobile-header" [translucent]="false">
+  <ion-toolbar class="mobile-header-inner">
+    <ion-row>
+      <ion-title class="ion-text-center"> Hochladen </ion-title>
+      <button class="header-btn" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Datei hochladen</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-row class="wide-header ion-hide-sm-down ion-justify-content-between">
+    <div class="wide-title-box">
+      <h2>Hochladen</h2>
+    </div>
+    <div class="header-btn-container">
+      <button class="wide-title-button" (click)="logout()">
+        <ion-icon name="log-out-outline" class="fs-4"></ion-icon>
+      </button>
+    </div>
+  </ion-row>
 
   <div class="secondary-content">
-    <div>
-      <div class="file-input">
-
-      </div>
-      <input type="file" (change)="onFileSelected($event)">
+    <div class="ion-justify-content-center tinted-bg">
+      <ion-item class="filePicker-container ion-no-padding">
+        <label
+          class="file-input ion-text-center ion-align-content-center"
+          for="filePicker"
+        >
+          <ion-icon name="cloud-upload-outline"></ion-icon>
+        </label>
+        <input
+          id="filePicker"
+          class="ion-display-none"
+          type="file"
+          (change)="onFileSelected($event)"
+        />
+      </ion-item>
     </div>
-    <div>
-      <ion-label>Name:</ion-label> {{ fileName || 'Keine Datei ausgewählt' }}
+    <div class="tinted-bg">
+      <ion-label><b>Name:</b></ion-label> {{ fileName || 'Keine Datei ausgewählt' }}
     </div>
 
-    <div>
-      <ion-label>Speicherort: </ion-label>
+    <div class="tinted-bg">
+      <ion-label><b>Speicherort:</b> </ion-label>
       <select [(ngModel)]="uploadType">
         <option value="gallery">Gallery</option>
         <option value="shared">Geteilte</option>
@@ -33,52 +51,52 @@
       </select>
       <!--Speicherorte-->
       @if (uploadType === 'shared' || uploadType === 'files') {
-        <ion-input label="Pfad: " [(ngModel)]="path" placeholder="/my-folder/" class="animate-fade-in">
-    </ion-input>
+      <ion-input
+        label="Sub-Pfad: "
+        [(ngModel)]="path"
+        placeholder="/my-folder/"
+        class="animate-fade-in text-input"
+      >
+      </ion-input>
       }
     </div>
-    <div>
-      <ion-label>Tags:</ion-label>
-      <div class="tag-display">
-        <ion-grid>
-          <ion-row>
-            @for (tag of tags; track tag; let i = $index) {
-            <ion-col size="auto" class="tag-col">
-              <ion-chip>
-                <ion-label>{{ tag }}</ion-label>
-                <ion-icon name="close-sharp" (click)="removeTag(i)"></ion-icon>
-              </ion-chip>
-            </ion-col>
-          }
-          </ion-row>
-        </ion-grid>
+
+    <div class="tinted-bg elevate">
+      <ion-label><b>Tags:</b></ion-label>
+      <div class="ion-flex-row tag-area">
+        @for (tag of tags; track $index) {
+        <cmp-tag-input-label
+          [tag]="tag"
+          (triggerRemove)="removeTag(tags.indexOf(tag))"
+        ></cmp-tag-input-label>
+        }
       </div>
 
-      <div class="search-container">
-        <ion-input 
-          label="Tag suchen oder erstellen: " 
-          labelPlacement="floating"
-          [(ngModel)]="newTag" 
-          (ionInput)="onSearchInput($event)"
-          (keyup.enter)="addTag()"
-          placeholder="z.B. Urlaub">
-        </ion-input>
-        @if (suggestedTags$ | async; as suggestions) {
-          @if (suggestions.length > 0) {
-            <ion-list class="floating-suggestion-list">
-              @for (s of suggestions; track s) {
-                <ion-item button (click)="selectTag(s)">
-                  <ion-label>{{ s }}</ion-label>
-                </ion-item>
-              }
-            </ion-list>
+
+      <div class="search-container tinted-bg">
+        <ion-input
+        label="Tag suchen oder erstellen:"
+        [(ngModel)]="newTag"
+        (ionInput)="onSearchInput($event)"
+        (keyup.enter)="addTag()"
+        placeholder="z.B. Urlaub"
+        class="animate-fade-in text-input"
+      >
+      </ion-input>
+        @if (suggestedTags$ | async; as suggestions) { @if (suggestions.length >
+        0) {
+        <ion-list class="floating-suggestion-list">
+          @for (s of suggestions; track s) {
+          <ion-item class="list-option" button (click)="selectTag(s)">
+            {{ s }}
+          </ion-item>
           }
-        }
+        </ion-list>
+        } }
       </div>
     </div>
 
-    <ion-button (click)="submitUpload()" 
-      [disabled]="!selectedFile">
+    <ion-button (click)="submitUpload()" [disabled]="!selectedFile">
       Jetzt hochladen
     </ion-button>
   </div>
@@ -97,5 +115,13 @@
     message="Bitte wähle eine Datei zum Upload aus."
     [buttons]="alertButtons"
     (didDismiss)="setFileAlertOpen(false)"
+  ></ion-alert>
+
+  <ion-alert
+    [isOpen]="successUpload"
+    header="Upload erfolgreich"
+    message="Der Upload der Datei war erfolgreich"
+    [buttons]="alertButtons"
+    (didDismiss)="setSuccessUpload(false)"
   ></ion-alert>
 </ion-content>

@@ -1,20 +1,40 @@
+@import 'src/global.scss';
 
-.file-input{
-    width: 200px;
-            height: 200px;
-            margin: auto;
-            border-radius: 10px;
-            border: 4px solid #F2E96D;
-            background: #566873;
+.file-input {
+    width: 100%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 40px;
+    --border-radius: 10px;
+    --border: 4px solid #F2E96D;
+    color: white;
 }
 
-.tag-display{
+.file-input:hover {
+    cursor: pointer;
+    background-color: #ebf21b54;
+}
+
+.filePicker-container {
+    border-radius: 10px;
+    border: 2px #F2E96D solid;
+    --padding: 0;
+    padding: 0;
+    --background: #8FA6A6;
+    --padding-start: 0;
+    --padding-end: 0;
+    --inner-padding-start: 0;
+    --inner-padding-end: 0;
+}
+
+.tag-display {
     margin: 2%;
     background: #feffff;
     border-radius: 10px;
 }
 
-.tag-display ion-col{
+.tag-display ion-col {
     background-color: #F2E96D;
     border-radius: 20px;
     margin: 1%;
@@ -24,21 +44,95 @@
     padding-right: 2%;
 }
 
-.secondary-content{
+.secondary-content {
     margin-top: 4%;
     margin-left: 6%;
     margin-right: 6%;
 }
 
-.secondary-content > div{
-    background-color: aquamarine;
+.secondary-content>.tinted-bg {
+    background-color: $tinted-gray 48%;
     border-radius: 15px;
     padding: 2%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1.5px solid #ffffff47;
+    backdrop-filter: blur(5px);
     margin-bottom: 2%;
 }
 
 .custom-center-button {
     margin-bottom: 20px;
-    
+
+}
+
+select {
+    margin-left: 5px;
+    background: $tinted-gray;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid $primary ;
+}
+
+option:hover{
+    background: $primary;
+}
+
+.text-input {
+    margin: 5px;
+    border: 2px $primary solid;
+    --border: 2px $primary solid;
+    --background: #8fa6a6ae;
+    border-radius: 8px;
+    --border-radius: 8px;
+    backdrop-filter: blur(10px);
+    --box-shadow: none;
+    -webkit-backdrop-filter: blur(10px);
+
+    --padding-bottom: 10px;
+    --padding-end: 10px;
+    --padding-start: 10px;
+    --padding-top: 10px;
+}
+
+.floating-suggestion-list{
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    max-height: 130px;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
+    overflow-x: auto;
+    --background: #8fa6a6de;
+    background: #8fa6a6de;
+    border-radius: 0 8px 8px 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 500;
+    text-align: start;
+}
+
+.floating-suggestion-list ion-item {
+    z-index: 100;
+  --background: transparent;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.search-container{
+    z-index: 100;
+    position: relative;
+}
+
+
+ion-button{
+    position: relative;
+    z-index: 0;
+    --z-index: 0;
+}
+
+.elevate{
+    position: relative;
+    z-index: 100;
 }

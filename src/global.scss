@@ -49,6 +49,8 @@ $secondary: #c1c1c1;
 $tinted-gray: #8FA6A6;
 $contrast: #3084F2;
 
+$input-color: #8fa6a6ae;
+
 :root {
     --ion-color-primary: $primary;
     --ion-color-primary-rgb: 235, 242, 27;
@@ -157,7 +159,8 @@ cmp-tag-input-label {
     background: #40404032;
     backdrop-filter: blur(3px);
     display: block;
-    position: absolute;
+    position: fixed;
+    overflow: hidden;
     top: 0;
     left: 0;
     width: 100%;
@@ -310,4 +313,14 @@ ion-fab-button.wide-title-button {
     --background: none !important;
     --box-shadow: none !important;
     --padding: 0;
+}
+
+.tag-area{
+    display: inherit;
+    min-height: 50px;
+    max-height: 150px;
+    padding: 5px;
+    overflow-y: scroll;
+    background: radial-gradient(circle, #abc1bf 80%, $tinted-gray 94%);
+    border: 1px solid $light-gray;
 }

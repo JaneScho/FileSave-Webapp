@@ -22,15 +22,7 @@ h3{
     margin: auto;
 }
 
-.tag-area{
-    display: inherit;
-    min-height: 50px;
-    max-height: 150px;
-    padding: 5px;
-    overflow-y: scroll;
-    background: radial-gradient(circle, #abc1bf 80%, $tinted-gray 94%);
-    border: 1px solid $light-gray;
-}
+
 
 ion-button{
     --border-radius: 8px;
