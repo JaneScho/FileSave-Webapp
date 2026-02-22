@@ -7,5 +7,10 @@
       <ion-img [src]="imageSrc" (ionError)="imageLoadErr()"></ion-img>
     }
     {{fileData.filename}}
+    <ion-row>
+      @for(tag of fileData.tags;track $index){
+        <label class="tag">{{tag}}</label>
+      }
+    </ion-row>
   }
 </div>

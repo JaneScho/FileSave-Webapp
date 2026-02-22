@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { AsyncPipe } from '@angular/common';
 import { IonInput, IonModal, IonChip, IonLabel, IonRow, IonCol, IonGrid, IonItem, IonList, IonButtons, IonButton, IonFab, IonFabButton, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core/components';
 
@@ -10,13 +8,16 @@ import { Observable } from 'rxjs';
 import { FileListDTO } from '../services/interfaces/dtos';
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { GalleryImageComponent } from "../components/gallery-image/gallery-image.component";
+import { addIcons } from 'ionicons';
+import { logOutOutline, reloadOutline } from 'ionicons/icons';
+import { AuthService } from '../services/api/security/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
   templateUrl: 'gallery.page.html',
   styleUrls: ['gallery.page.scss'],
-  imports: [AsyncPipe, FormsModule,
-    IonInput, IonModal, IonChip, IonLabel, IonCol, IonRow, IonGrid, IonItem, IonList, IonButtons, IonButton, IonFab, IonFabButton, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, ExploreContainerComponent, FilePopupComponent, GalleryImageComponent],
+  imports: [FormsModule,IonCol, IonRow, IonGrid,IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, FilePopupComponent, GalleryImageComponent],
 })
 export class GalleryPage implements OnInit {
 
@@ -30,7 +31,9 @@ export class GalleryPage implements OnInit {
   message = 'This modal example uses triggers to automatically open a modal when the button is clicked.';
   name!: string;
 
-  constructor(public downloadService: Download, private cdr: ChangeDetectorRef) { }
+  constructor(public downloadService: Download, private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router) { 
+    addIcons({reloadOutline, logOutOutline});
+  }
 
   ngOnInit() {
     this.loadFiles();
@@ -41,10 +44,15 @@ export class GalleryPage implements OnInit {
       next: data =>{
         this.files = data;
         console.log(this.files);
+        this.cdr.detectChanges();
       }
     });
   }
 
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 
   //...
   cancel() {

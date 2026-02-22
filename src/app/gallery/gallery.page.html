@@ -1,6 +1,10 @@
 <ion-header class="ion-hide-sm-up mobile-header" [translucent]="true">
   <ion-toolbar class="mobile-header-inner">
-    <ion-title class="ion-text-center"> Gallerie </ion-title>
+    <ion-row>
+      <button class="header-btn" (click)="loadFiles()"><ion-icon name="reload-outline"></ion-icon></button>
+      <ion-title class="ion-text-center"> Gallerie </ion-title>
+      <button class="header-btn" (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -19,9 +23,12 @@
     <ion-grid>
       <ion-row>
         @for(file of files;track $index){
-          <ion-col size="6" size-sm="6" size-md="3">
-            <cmp-gallery-image (click)="callShowPopup(file)" [fileData]="file"></cmp-gallery-image>
-          </ion-col>
+        <ion-col size="6" size-sm="6" size-md="3">
+          <cmp-gallery-image
+            (click)="callShowPopup(file)"
+            [fileData]="file"
+          ></cmp-gallery-image>
+        </ion-col>
         }
       </ion-row>
     </ion-grid>

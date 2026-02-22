@@ -1,17 +1,21 @@
 import { FileListDTO } from './../services/interfaces/dtos';
 import { ChangeDetectorRef, Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon } from '@ionic/angular/standalone';
 import { FileListItemComponent } from '../components/file-list-item/file-list-item.component';
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { Observable } from 'rxjs';
 import { Download } from '../services/api/download';
 import { AsyncPipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/api/security/auth';
+import { addIcons } from 'ionicons';
+import { logOutOutline, reloadOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-private',
   templateUrl: 'private.page.html',
   styleUrls: ['private.page.scss'],
-  imports: [AsyncPipe,
+  imports: [IonIcon, IonRow, AsyncPipe,
     IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent]
 })
 export class PrivatePage implements OnInit{
@@ -23,7 +27,8 @@ export class PrivatePage implements OnInit{
 
   currentPath: string = '';
 
-  constructor(private cdr: ChangeDetectorRef, private downloadService: Download) {
+  constructor(private cdr: ChangeDetectorRef, private downloadService: Download, public auth: AuthService, private router: Router) {
+    addIcons({reloadOutline, logOutOutline});
   }
 
   ngOnInit(){
@@ -32,6 +37,7 @@ export class PrivatePage implements OnInit{
   
     loadFiles(){
       this.files$ = this.downloadService.getFileList("files", this.currentPath);
+      this.cdr.detectChanges();
     }
 
 
@@ -45,6 +51,11 @@ export class PrivatePage implements OnInit{
       this.selectedFile = fileData;
       this.cdr.detectChanges();
     }
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 
   hidePopup(){

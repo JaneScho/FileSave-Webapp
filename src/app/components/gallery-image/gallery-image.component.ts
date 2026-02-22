@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { IonImg, IonSpinner } from "@ionic/angular/standalone";
+import { IonImg, IonSpinner, IonRow } from "@ionic/angular/standalone";
 import { FileListDTO } from 'src/app/services/interfaces/dtos';
 import { api } from 'src/app/services/api/api';
 import { HttpClient } from '@angular/common/http';
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   selector: 'cmp-gallery-image',
   templateUrl: './gallery-image.component.html',
   styleUrls: ['./gallery-image.component.scss'],
-  imports: [IonSpinner, IonImg],
+  imports: [IonRow, IonSpinner, IonImg],
 })
 export class GalleryImageComponent implements OnInit {
   @Input('fileData') fileData !: FileListDTO;

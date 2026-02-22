@@ -1,15 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Dateisuche
-    </ion-title>
+<ion-header class="ion-hide-sm-up mobile-header" [translucent]="true">
+  <ion-toolbar class="mobile-header-inner">
+    <ion-row>
+      <button class="header-btn" (click)="loadFiles()"><ion-icon name="reload-outline"></ion-icon></button>
+      <ion-title class="ion-text-center"> Dateisuche </ion-title>
+      <button class="header-btn" (click)="logout()"><ion-icon name="log-out-outline"></ion-icon></button>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Dateisuche</ion-title>
+  <ion-header collapse="condense" class="ion-hide-sm-up mobile-header">
+    <ion-toolbar class="mobile-header-inner">
+      <ion-title class="ion-text-center" size="large">Geteilte Dateien</ion-title>
     </ion-toolbar>
   </ion-header>
 

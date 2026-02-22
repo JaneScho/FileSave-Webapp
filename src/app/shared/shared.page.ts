@@ -1,25 +1,35 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonRow, IonIcon } from '@ionic/angular/standalone';
 import { ExploreContainerComponent } from '../explore-container/explore-container.component';
 import { FileListItemComponent } from "../components/file-list-item/file-list-item.component";
 import { FilePopupComponent } from "../components/file-popup/file-popup.component";
 import { FileListDTO } from '../services/interfaces/dtos';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/api/security/auth';
 
 @Component({
   selector: 'app-shared',
   templateUrl: 'shared.page.html',
   styleUrls: ['shared.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, FileListItemComponent, FilePopupComponent],
+  imports: [IonIcon, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, FilePopupComponent],
 })
 export class SharedPage {
   showPopup: Boolean = false;
   files: FileListDTO[] = [];
   selectedFile !: FileListDTO; 
 
-  constructor(private cdr: ChangeDetectorRef) {
+  constructor(private cdr: ChangeDetectorRef, public auth: AuthService, private router: Router) {
     this.files = [{filename: 'TestFile.txt', filepath: '/', isFolder: false, tags: ['testTag', 'testTag2', "aawdawdaw", "bawdawda", "boadawdawdawdawd"]} as FileListDTO, 
                   {filename: 'Bob.txt', filepath: '/', isFolder: false, tags: []} as FileListDTO,
                   {filename: 'BobFolder', filepath: '/', isFolder: true, tags: []} as FileListDTO]
+  }
+
+  ngOnInit(){
+    this.loadFiles();
+  }
+
+  loadFiles(){
+    
   }
 
   listItemSelected(fileData: FileListDTO){
@@ -37,5 +47,10 @@ export class SharedPage {
   hidePopup(){
     this.showPopup = false;
     this.cdr.detectChanges();
+  }
+
+  logout(){
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

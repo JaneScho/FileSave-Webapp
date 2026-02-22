@@ -187,3 +187,24 @@ cmp-tag-input-label {
     background: transparent !important;
     --background: transparent !important;
 }
+
+.tag {
+    display: inline-flex;
+    margin: 5px;
+    background-color: $primary;
+    border-radius: 12px;
+    padding: 4px 5px;
+    color: $dark-gray;
+}
+
+.header-btn{
+    background: none;
+    color: #566873;
+    font-size: 36px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.header-btn:hover{
+    color: $primary-dark;
+}
