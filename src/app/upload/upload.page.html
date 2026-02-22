@@ -82,4 +82,20 @@
       Jetzt hochladen
     </ion-button>
   </div>
+
+  <ion-alert
+    [isOpen]="isPathAlertOpen"
+    header="Kein Pfad gesetzt."
+    message="Bitte gebe einen Pfad ein, wenn du diese Datei teilen möchtest."
+    [buttons]="alertButtons"
+    (didDismiss)="setPathAlertOpen(false)"
+  ></ion-alert>
+
+  <ion-alert
+    [isOpen]="isFileAlertOpen"
+    header="Kein Datei gewählt."
+    message="Bitte wähle eine Datei zum Upload aus."
+    [buttons]="alertButtons"
+    (didDismiss)="setFileAlertOpen(false)"
+  ></ion-alert>
 </ion-content>
