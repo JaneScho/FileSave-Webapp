@@ -8,7 +8,7 @@ import { api } from './api';
 })
 export class Tags {
 
-  private LIMIT = 10; //set limit for search and all
+  private LIMIT = 10;
   
   constructor(private http: HttpClient){}
 

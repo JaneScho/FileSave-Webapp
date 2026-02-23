@@ -18,21 +18,12 @@ export class Download {
   
   //Listen:
   getFileList(type: 'shared' | 'gallery' | 'files',
-              subPath?: string
-    ){
+              subPath?: string ){
     const url = `${api.path}/download/list/${type}`;
 
     let params = new HttpParams();
     if(subPath){
       let cleanPath = this.pathCorService.cleanupPath(type, subPath);
-      /*
-      if(type == 'shared'){
-        console.log("Cleaning up path");
-        cleanPath = this.cleanupSharedPath(subPath);
-        console.log("Cleaned path: ", cleanPath);
-      } else {
-        cleanPath = subPath;
-      }*/
       params = params.set('p', cleanPath);
     }
 
@@ -52,38 +43,35 @@ export class Download {
 
   
   //Dateien:
+  //Implemented based on: //https://coreui.io/answers/how-to-download-a-file-in-javascript/#:~:text=Create%20a%20blob%20URL%20and,to%20trigger%20file%20downloads%20programmatically.&text=This%20code%20creates%20a%20Blob,triggers%20the%20browser's%20download%20mechanism.
   downloadFile(type: 'shared' | 'gallery' | 'file',
               filename: string,
               subPath?: string){
 
     const url = `${api.path}/download/${type}/${filename}`;
-
-    
-   let params = new HttpParams();
+    let params = new HttpParams();
     if(subPath){
         let cleanPath = this.pathCorService.cleanupPath(type, subPath);
         params = params.set('p', cleanPath);
     }
-
     return this.http.get(url, {params, responseType: 'blob'});
   }
 
   downloadAndSaveFile(type: 'shared' | 'gallery' | 'file',
                       filename: string,
                       subPath?: string){
+
     this.downloadFile(type, filename, subPath).subscribe(async (blob: Blob) => {
 
       if (Capacitor.getPlatform() === 'web') {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = filename; // This triggers the browser download dialog
+        link.download = filename; 
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-        console.log('Web download triggered');
-        
+        window.URL.revokeObjectURL(url);  
       } else {
         const base64Data = await this.convertBlobToBase64(blob) as string;
         const rawData = base64Data.split(',')[1];
@@ -94,27 +82,12 @@ export class Download {
           directory: Directory.Documents,
           recursive: true
         });
-        console.log('Mobile file saved');
       }
-      /*
-      const base64Data = await this.convertBlobToBase64(blob) as string;
-
-      try {
-        await Filesystem.writeFile({
-          path: filename,           // The name of the file on the phone
-          data: base64Data,         // The Base64 string
-          directory: Directory.Documents, // Saves to the user's Documents folder
-          recursive: true           // Creates folders if they don't exist
-        });
-        console.log('Image saved successfully!');
-      } catch (e) {
-        console.error('Error saving file', e);
-      }
-        */
     });
   }
 
-  //not sure
+
+  //Implemented based on: //https://www.geeksforgeeks.org/javascript/how-to-convert-blob-to-base64-encoding-using-javascript/
   private convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = reject;

@@ -16,21 +16,10 @@ export class Bearbeiten {
   updateTags(type: 'shared' | 'gallery' | 'files', filename: string, tags: TagInputDTO[], subPath?: string){
     const url = `${api.path}/bearbeiten/${type}/${encodeURIComponent(filename)}`;
 
-    //encodedURIComponent als schutz for Spezialzeichen
-
     let params = new HttpParams();
     if(subPath){
       let cleanPath = this.pathCorService.cleanupPath(type, subPath);
-
-      /*
-      if (subPath.includes('/files/')) {
-        cleanPath = subPath.split('/files/')[1];
-      } else if (subPath.endsWith('/files')) {
-        cleanPath = '/';
-      }
-        */
-       //'jannes/fotos/'
-        params = params.set('p', cleanPath);
+      params = params.set('p', cleanPath);
     }
     return this.http.put(url, tags, {params});
   }
@@ -41,15 +30,7 @@ export class Bearbeiten {
     let params = new HttpParams();
     if(subPath){
       let cleanPath = this.pathCorService.cleanupPath(type, subPath);
-
-      /*
-      if (subPath.includes('/files/')) {
-        cleanPath = subPath.split('/files/')[1];
-      } else if (subPath.endsWith('/files')) {
-        cleanPath = '/';
-      }
-        */
-        params = params.set('p', cleanPath);
+      params = params.set('p', cleanPath);
     }
 
     return this.http.delete(url,{params, responseType: 'text'});

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IonSearchbar, IonList, IonItem, IonItemOption, IonText } from "@ionic/angular/standalone";
+import { IonSearchbar, IonList, IonItemOption} from "@ionic/angular/standalone";
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'cmp-searching-text-input',
   templateUrl: './searching-text-input.component.html',
   styleUrls: ['./searching-text-input.component.scss'],
-  imports: [IonText, IonItemOption, IonItem, IonList, IonSearchbar, FormsModule],
+  imports: [ IonItemOption, IonList, IonSearchbar, FormsModule],
   host:{
     class: 'ion-display-relative'
   }
@@ -35,9 +35,11 @@ export class SearchingTextInputComponent  implements OnInit {
     
     const searchIn = this.searchTerm.toLowerCase();
     if (searchIn && searchIn.trim() !== '') {
+
       this.filteredItems = this.options.filter(options =>
         options.toLowerCase().includes(searchIn)
       );
+      
     } else {
       this.filteredItems = [];
     }

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { IonInput, IonModal, IonChip, IonLabel, IonRow, IonCol, IonGrid, IonItem, IonList, IonButtons, IonButton, IonFab, IonFabButton, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, IonFabList } from '@ionic/angular/standalone';
+import { IonModal, IonRow, IonCol, IonGrid, IonFab, IonFabButton, IonHeader, IonToolbar, 
+        IonTitle, IonContent, IonIcon, IonFabList } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { OverlayEventDetail } from '@ionic/core/components';
 
@@ -20,7 +21,9 @@ import { Upload } from '../services/api/uploadService';
   selector: 'app-gallery',
   templateUrl: 'gallery.page.html',
   styleUrls: ['gallery.page.scss'],
-  imports: [IonFabList, FormsModule, IonCol, IonRow, IonGrid, IonHeader, IonToolbar, IonTitle, IonContent, IonIcon, FilePopupComponent, RouterLink, GalleryImageComponent, IonFab, IonFabButton],
+  imports: [IonFabList, FormsModule, IonCol, IonRow, IonGrid, IonHeader, 
+            IonToolbar, IonTitle, IonContent, IonIcon, FilePopupComponent, 
+            RouterLink, GalleryImageComponent, IonFab, IonFabButton],
 })
 export class GalleryPage implements OnInit {
 
@@ -60,7 +63,6 @@ export class GalleryPage implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  //...
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
@@ -90,27 +92,26 @@ export class GalleryPage implements OnInit {
   async takeNewPhoto(){
 
     try {
-    const location = await this.locationService.getLocationName();
-    console.log('Current location:', location);
+      const location = await this.locationService.getLocationName();
 
-    const formData = await this.cameraService.takeNewPicture();
+      const formData = await this.cameraService.takeNewPicture();
 
-    const tags: string[] = [location];
+      const tags: string[] = [location];
 
-    this.uploadService.uploadFile(
-      "gallery",
-      formData.get('file') as Blob,
-      formData.get('filename') as string,
-      formData.get('fileType') as string,
-      'APPEND_NUMBER',
-      tags
-    ).subscribe({
-      next: (res) => console.log('Upload Success:', res),
-      error: (err) => console.error('Upload Error:', err)
-    });
+      this.uploadService.uploadFile(
+        "gallery",
+        formData.get('file') as Blob,
+        formData.get('filename') as string,
+        formData.get('fileType') as string,
+        'APPEND_NUMBER',
+        tags
+      ).subscribe({
+        next: (res) => console.log('Upload Success:', res),
+        error: (err) => console.error('Upload Error:', err)
+      });
 
-  } catch (err) {
-    console.error('Process failed:', err);
-  }
+    } catch (err) {
+      console.error('Process failed:', err);
+    }
   }
 }

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonAlert, IonList, IonItem, IonChip, IonSearchbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent, IonFab, IonFabButton, IonFabList, IonItemOption } from '@ionic/angular/standalone';
-import { ExploreContainerComponent } from '../explore-container/explore-container.component';
-
+import { IonAlert, IonList, IonItem, IonIcon, IonButton, IonRow, IonInput, IonLabel, 
+        IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
 import { Upload } from '../services/api/uploadService';
 import { Tags } from '../services/api/tags';
 import { Observable, Subject, debounceTime, switchMap, of } from 'rxjs';
@@ -10,16 +9,16 @@ import { map } from 'rxjs/operators';
 import { TagCollectionDTO} from '../services/interfaces/dtos';
 import { AsyncPipe } from '@angular/common';
 import { AuthService } from '../services/api/security/auth';
-import { Router, RouterLink } from '@angular/router';
+import { Router} from '@angular/router';
 import { TagInputLabelComponent } from "../components/tag-input-label/tag-input-label.component";
-import { SearchingTextInputComponent } from "../components/searching-text-input/searching-text-input.component";
 
 @Component({
   selector: 'app-upload',
   templateUrl: 'upload.page.html',
   styleUrls: ['upload.page.scss'],
-  imports: [IonItemOption, IonFabList, IonFabButton, IonFab, FormsModule, AsyncPipe, RouterLink,
-    IonAlert, IonList, IonItem, IonChip, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonInput, IonLabel, IonHeader, IonToolbar, IonTitle, IonContent, TagInputLabelComponent, SearchingTextInputComponent],
+  imports: [ FormsModule, AsyncPipe, IonAlert, IonList, IonItem, IonIcon, 
+            IonButton, IonRow, IonInput, IonLabel, IonHeader, IonToolbar, 
+            IonTitle, IonContent, TagInputLabelComponent],
 })
 export class UploadPage {
   selectedFile: File | null = null;
@@ -29,19 +28,19 @@ export class UploadPage {
   tags: string[] = [];
   newTag: string = '';
 
-  searchQuery$ = new Subject<string>(); //Observer und Observable -> im Text erwaehnen
- suggestedTags$: Observable<string[]>;
+  searchQuery$ = new Subject<string>();
+  suggestedTags$: Observable<string[]>;
 
- isFileAlertOpen = false;
- isPathAlertOpen = false;
- successUpload = false;
+  isFileAlertOpen = false;
+  isPathAlertOpen = false;
+  successUpload = false;
 
- alertButtons = ['OK'];
+  alertButtons = ['OK'];
 
   constructor(private uploadService: Upload, private tagService: Tags, public auth: AuthService, private router: Router) {
     this.suggestedTags$ = this.searchQuery$.pipe(
-      debounceTime(300), //entlastung der API
-      switchMap(query => { //basically cancel -> A wird getipt, waehrend call startet, aber dann wird doch b getippt
+      debounceTime(300),
+      switchMap(query => {
         if (!query.trim()) return of([]); 
         
         return this.tagService.searchTags(query).pipe(
@@ -123,9 +122,7 @@ export class UploadPage {
         this.path
       ).subscribe({
         next: (res) => {
-          console.log('Upload Success:', res)
           this.successUpload = true;
-          //Toast
           this.reset();
           },
         error: (err) => console.error('Upload Error:', err)

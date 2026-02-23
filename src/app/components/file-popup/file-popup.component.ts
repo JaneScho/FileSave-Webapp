@@ -1,16 +1,17 @@
-import { asNativeElements, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IonAlert, IonRow, IonLabel, IonButton, IonIcon } from "@ionic/angular/standalone";
+import { addIcons } from 'ionicons';
+import { addCircleOutline, closeOutline, downloadOutline, trashOutline } from 'ionicons/icons';
+
+import { Download } from 'src/app/services/api/download';
+import { Bearbeiten } from 'src/app/services/api/bearbeiten';
+import { Tags } from 'src/app/services/api/tags';
 import { FileListDTO, TagCollectionDTO, TagInputDTO } from 'src/app/services/interfaces/dtos';
 import { TagInputLabelComponent } from "../tag-input-label/tag-input-label.component";
 import { SearchingTextInputComponent } from "../searching-text-input/searching-text-input.component";
-import { IonAlert, IonRow, IonLabel, IonButton, IonIcon } from "@ionic/angular/standalone";
-import { addIcons } from 'ionicons';
-import { addCircleOutline, addOutline, closeOutline, downloadOutline, trashOutline } from 'ionicons/icons';
-import { Download } from 'src/app/services/api/download';
-import { Bearbeiten } from 'src/app/services/api/bearbeiten';
-import { catchError, debounceTime, distinctUntilChanged, map, of, Subject, switchMap } from 'rxjs';
-import { Tags } from 'src/app/services/api/tags';
 
 import type { OverlayEventDetail } from '@ionic/core';
+import { catchError, debounceTime, map, of, Subject, switchMap } from 'rxjs';
 
 @Component({
   selector: 'page-file-popup',

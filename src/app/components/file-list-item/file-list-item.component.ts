@@ -1,8 +1,10 @@
 import { IonIcon, IonRow } from '@ionic/angular/standalone';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FileListDTO } from 'src/app/services/interfaces/dtos';
+
 import { documentOutline, folderOpenOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+
+import { FileListDTO } from 'src/app/services/interfaces/dtos';
 
 @Component({
   selector: 'cmp-file-list-item',

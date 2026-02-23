@@ -29,15 +29,6 @@ export interface TagDownloadDTO{
     tagName: string
 }
 
-//Modul security:
-export interface PrincipalDTO{
-    username: string
-}
-
-export interface UserDTO{
-    username: string
-}
-
 export interface UploadResponseDTO{
     filename: string,
     filepath: string,

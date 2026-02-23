@@ -17,7 +17,8 @@ import { Upload } from '../services/api/uploadService';
   selector: 'app-shared',
   templateUrl: 'shared.page.html',
   styleUrls: ['shared.page.scss'],
-  imports: [IonFabList, IonFabButton, IonFab, IonIcon, IonRow, IonHeader, IonToolbar, IonTitle, IonContent, FileListItemComponent, RouterLink, FilePopupComponent, AsyncPipe],
+  imports: [IonFabList, IonFabButton, IonFab, IonIcon, IonRow, IonHeader, IonToolbar, IonTitle, 
+            IonContent, FileListItemComponent, RouterLink, FilePopupComponent, AsyncPipe],
 })
 export class SharedPage {
   showPopup: Boolean = false;
@@ -71,27 +72,27 @@ export class SharedPage {
   async takeNewPhoto(){
 
     try {
-    const location = await this.locationService.getLocationName();
-    console.log('Current location:', location);
+      const location = await this.locationService.getLocationName();
+      console.log('Current location:', location);
 
-    const formData = await this.cameraService.takeNewPicture();
+      const formData = await this.cameraService.takeNewPicture();
 
-    const tags: string[] = [location];
+      const tags: string[] = [location];
 
-    this.uploadService.uploadFile(
-      "gallery",
-      formData.get('file') as Blob,
-      formData.get('filename') as string,
-      formData.get('fileType') as string,
-      'APPEND_NUMBER',
-      tags
-    ).subscribe({
-      next: (res) => console.log('Upload Success:', res),
-      error: (err) => console.error('Upload Error:', err)
-    });
+      this.uploadService.uploadFile(
+        "gallery",
+        formData.get('file') as Blob,
+        formData.get('filename') as string,
+        formData.get('fileType') as string,
+        'APPEND_NUMBER',
+        tags
+      ).subscribe({
+        next: (res) => console.log('Upload Success:', res),
+        error: (err) => console.error('Upload Error:', err)
+      });
 
-  } catch (err) {
-    console.error('Process failed:', err);
-  }
+    } catch (err) {
+      console.error('Process failed:', err);
+    }
   }
 }

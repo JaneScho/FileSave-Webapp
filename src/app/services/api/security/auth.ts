@@ -10,24 +10,22 @@ export class AuthService {
   }
 
   private initAuth() {
-  this.oauthService.configure(authCodeFlowConfig);
-  
-  // 1. Try to login
-  this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-    console.log('Discovery document loaded. Checking token...');
+    this.oauthService.configure(authCodeFlowConfig);
+    
+    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
+      console.log('Discovery document loaded. Checking token...');
 
-    if (this.oauthService.hasValidAccessToken()) {
-      console.log('Token is valid! Navigating to gallery...');
-      this.checkIdentity();
-      this.router.navigate(['/tabs/gallery']);
-    } else {
-      console.log('No valid token found yet. Staying on login page.');
-      this.router.navigate(['/login']);
-    }
-  }).catch(err => {
-    console.error('Handshake failed:', err);
-  });
-}
+      if (this.oauthService.hasValidAccessToken()) {
+        this.checkIdentity();
+        this.router.navigate(['/tabs/gallery']);
+      } else {
+        console.log('No valid token found yet. Staying on login page.');
+        this.router.navigate(['/login']);
+      }
+    }).catch(err => {
+      console.error('Handshake failed:', err);
+    });
+  }
 
   public login() {
     this.oauthService.initCodeFlow();
@@ -38,12 +36,12 @@ export class AuthService {
   }
 
   checkIdentity() {
-  const claims = this.oauthService.getIdentityClaims();
-  console.log('Full Token Claims:', claims);
-  
-  if (claims) {
-    console.log('Principal Name (sub):', claims['sub']); 
-    console.log('Username (preferred_username):', claims['preferred_username']);
+    const claims = this.oauthService.getIdentityClaims();
+    console.log('Full Token Claims:', claims);
+    
+    if (claims) {
+      console.log('Principal Name (sub):', claims['sub']); 
+      console.log('Username (preferred_username):', claims['preferred_username']);
+    }
   }
-}
 }

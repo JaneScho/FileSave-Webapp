@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IonIcon, IonButton } from "@ionic/angular/standalone";
+import { IonIcon } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { closeOutline } from 'ionicons/icons';
 
@@ -7,7 +7,7 @@ import { closeOutline } from 'ionicons/icons';
   selector: 'cmp-tag-input-label',
   templateUrl: './tag-input-label.component.html',
   styleUrls: ['./tag-input-label.component.scss'],
-  imports: [IonButton, IonIcon],
+  imports: [IonIcon],
 })
 export class TagInputLabelComponent  implements OnInit {
   @Input() tag: String = "";

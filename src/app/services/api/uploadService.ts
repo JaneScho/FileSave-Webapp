@@ -39,16 +39,14 @@ export class Upload {
     if(filepath){
       formData.append('filepath', filepath);
     }
-     
-    console.log("--- FormData Content ---");
-  formData.forEach((value, key) => {
-    if (value instanceof File) {
-      console.log(`${key}: [File] ${value.name} (${value.size} bytes)`);
-    } else {
-      console.log(`${key}: ${value}`);
-    }
-  });
 
+    formData.forEach((value, key) => {
+      if (value instanceof File) {
+        console.log(`${key}: [File] ${value.name} (${value.size} bytes)`);
+      } else {
+        console.log(`${key}: ${value}`);
+      }
+    });
 
     return this.http.post(url, formData);
   }

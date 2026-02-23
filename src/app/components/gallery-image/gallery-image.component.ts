@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { IonImg, IonSpinner, IonRow } from "@ionic/angular/standalone";
+import { HttpClient } from '@angular/common/http';
+
 import { FileListDTO } from 'src/app/services/interfaces/dtos';
 import { api } from 'src/app/services/api/api';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'cmp-gallery-image',
